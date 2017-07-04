@@ -1,1 +1,1 @@
-# a-kitchen.gitpub.io
+# a-kitchen.github.io
