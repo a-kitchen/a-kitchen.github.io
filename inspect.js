@@ -1,4 +1,4 @@
 function onClick(){
 	o = document.getElementById("out");
-	o.innerHTML = "Hi";
+	o.innerHTML = "Hi!";
 }
