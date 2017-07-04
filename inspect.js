@@ -1,2 +1,4 @@
-o = getElementById("out");
-o.innerHTML = "Hi";
+function onClick(){
+	o = getElementById("out");
+	o.innerHTML = "Hi";
+}
