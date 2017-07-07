@@ -1,3 +1,8 @@
+
+
+  BluetoothRemoteGATTServer bltr;
+  BluetoothRemoteGattCharacteristic crx,ctx;
+
 function onClick(){
 	o = document.getElementById("out");
 	o.innerHTML = "Hi!";
@@ -10,33 +15,35 @@ function onClick(){
 			console.log('id:', device.id);
 			console.log('Connected:' + device.gatt.connected)
 			
-			 return device.gatt.connect();
-			
-			}).this (server =>{
-				
-				console.log('Getting Battery Service…');
-	            return server.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB');
-				
-			}).then(service => {
-				
-	            console.log('Getting Battery Characteristic…');
-	            return service.getCharacteristic('00000002-0000-1000-8000-00805F9B34FB');
-				
-            }).then(characteristic => {
-				  
-	            console.log('Reading battery level…');
-	            return characteristic.readValue();
-				
-            }).then(value => {
-				
-	           value = value.buffer ? value : new DataView(value);
-	           console.log('Battery percentage:', value.getUint8(0));
-			  
-            }).catch(exception => {
-				
-	           console.log(exception);
-			
-            });
+			bltr =device.gatt.connect()
+		
+			});
 
 
 }
+
+//function getService(){
+	//blegatt = bltr.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB');
+//}
+
+function getServices(){
+	ctx = bltr.getCharacteristic('00000001-0000-1000-8000-00805F9B34FB');
+	crx = bltr.getCharacteristic('00000002-0000-1000-8000-00805F9B34FB');
+}
+
+function startNo(){
+	crx.startNotifications();
+}
+
+function stopNo(){
+	crx.stopNotifications();
+}
+
+function read(){
+	DataView data = crx.readValue();
+}
+
+function write(){
+	ctx.writeValue(BufferSource value);
+}
+
