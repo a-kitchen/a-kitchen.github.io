@@ -8,7 +8,11 @@ function onClick(){
 	o.innerHTML = "Hi!";
 	console.log('你好！');
 	
-	let options = {};
+}
+
+function search(){
+	
+		let options = {};
 	options.acceptAllDevices = true;
 	navigator.bluetooth.requestDevice(options).then(device => {
 			console.log('Got device:', device.name);
@@ -18,9 +22,9 @@ function onClick(){
 			bltr =device.gatt.connect()
 		
 			});
-
-
+	
 }
+
 
 //function getService(){
 	//blegatt = bltr.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB');
