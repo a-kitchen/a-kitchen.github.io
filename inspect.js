@@ -1,27 +1,33 @@
 
-
-  BluetoothRemoteGATTServer bltr;
+	  
+ BluetoothRemoteGATTServer bltr;
   BluetoothRemoteGattCharacteristic crx,ctx;
 
 function onClick(){
+document.getElementById("demo").innerHTML="asd";
 	o = document.getElementById("out");
 	o.innerHTML = "Hi!";
-	console.log('你好！');
+	log('你好！');
 	
 }
 
 function search(){
-	
+	document.getElementById("demo").innerHTML="My First JavaScript";
 		let options = {};
 	options.acceptAllDevices = true;
 	navigator.bluetooth.requestDevice(options).then(device => {
 			console.log('Got device:', device.name);
 			console.log('id:', device.id);
 			console.log('Connected:' + device.gatt.connected)
+			var s device.name;
+			
+			document.write("<p>s</p>");
 			
 			bltr =device.gatt.connect()
 		
-			});
+			}).catch(error => {}
+			document.getElementById("demo").innerHTML="My First JavaScript";
+			);
 	
 }
 

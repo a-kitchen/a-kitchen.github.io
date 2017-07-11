@@ -4,9 +4,32 @@
 </head>
 <body>
 <h1>a-kitchen</h1>
-<p id="out" onclick="onClick()">Hello, World!
+<button type="button" onclick="onClick()">Hello, World!</button>
 <br>
-<button type="button" onclick="search()">get Service</button>
+<button type="button" onclick="search()">sraech</button>
+<p id="demo"></p>
+
+<script>
+function search(){
+		let options = {};
+	options.acceptAllDevices = true;
+	navigator.bluetooth.requestDevice(options).then(device => {
+			console.log('Got device:', device.name);
+			console.log('id:', device.id);
+			console.log('Connected:' + device.gatt.connected)
+			var s = device.name;
+			document.getElementById("demo").innerHTML=s;
+		
+			
+			//bltr =device.gatt.connect()
+		
+			}).catch(error => {}
+			document.getElementById("demo").innerHTML="My First JavaScript";
+			);
+	
+	
+}
+</script>
 <br>
 <button type="button" onclick="getServices()">get Service</button>
 <br>
