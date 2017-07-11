@@ -7,35 +7,6 @@
 <button type="button" onclick="onClick()">Hello, World!</button>
 <br>
 <button type="button" onclick="search()">sraech</button>
-<p id="demo"></p>
-
-<script>
-function search(){
-try
-  {
-let options = {};
-		
-	options.acceptAllDevices = true;
-
-	navigator.bluetooth.requestDevice(options).then(device => {
-		
-			var s = device.name;
-				alert( ":123456 " +s);
-			document.getElementById("demo").innerHTML="name"+s;
-		
-			});
-  }
-catch(err)
-  {
-  txt+="错误描述：" + err.message + "\n\n";
-  alert(txt);
-  }
-
-	
-	
-	
-}
-</script>
 <br>
 <button type="button" onclick="getServices()">get Service</button>
 <br>
@@ -47,7 +18,6 @@ catch(err)
 <br>
 <button type="button" onclick="write()">write</button>
 <br>
-
 
 <p>Links
 <ul>
