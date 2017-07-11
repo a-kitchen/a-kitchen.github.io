@@ -14,11 +14,13 @@ function search(){
 		let options = {};
 	options.acceptAllDevices = true;
 	navigator.bluetooth.requestDevice(options).then(device => {
+	document.getElementById("demo").innerHTML="holle";
 			console.log('Got device:', device.name);
 			console.log('id:', device.id);
 			console.log('Connected:' + device.gatt.connected)
+			
 			var s = device.name;
-			document.getElementById("demo").innerHTML=s;
+			document.getElementById("demo").innerHTML="sss"+s;
 		
 			
 			//bltr =device.gatt.connect()
