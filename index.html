@@ -5,27 +5,26 @@
 <body>
 <h1>a-kitchen</h1>
 <br>
-<button type="button" onclick="search()">sraech</button>
 <script>
-
-let options = {
-		  filters: []
-	   };
+function search(){
+  document.getElementById("demo").innerHTML="My First JavaScript";
+	let options = {  filters:[]};
 	options.acceptAllDevices = true;
+	
 	navigator.bluetooth.requestDevice(options).then(device => {
 			console.log('Got device:', device.name);
 			console.log('id:', device.id);
 			console.log('Connected:' + device.gatt.connected);
-			console.log('Connected:' + device.gatt.connected);
 			document.getElementById("demo").innerHTML="My First JavaScript"+device.name;
 		//	bltr =device.gatt.connect();
 		
-			}).catch(error => {}
-			document.getElementById("demo").innerHTML="My First JavaScript"+error;
-			);
-
+			});
+	
+}
 </script>
 
+<button type="button" onclick="search()">sraech</button>
+<p id= "demo"> 123456789 </p>
 <br>
 <button type="button" onclick="getServices()">get Service</button>
 <br>
