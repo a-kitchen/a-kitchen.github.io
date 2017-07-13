@@ -5,15 +5,20 @@
 <body>
 <h1>a-kitchen</h1>
 <br>
+<input id="name" type="text" size=17 placeholder="Device Name">
+<button type="button" onclick="search()">sraech</button>
+<p id= "demo"> 123456789 </p>
 <script>
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
-	let options = {
-		  filters: [
-		   {name: 'Roger'}
-		  	 // {services:['heart_rate'],connectable:true }
-		  ]
-	   };
+	let options = {};
+	     let filters = [];
+	    let filterName = document.querySelector('#name').value;
+  if (filterName) {
+    filters.push({name: filterName});
+  }
+  options.filters = filters;
+	   
 	options.acceptAllDevices = true;
 	navigator.bluetooth.requestDevice(options).then(device => {
 			console.log('Got device:', device.name);
@@ -28,10 +33,9 @@ function search(){
 			});
 	
 }
+
 </script>
 
-<button type="button" onclick="search()">sraech</button>
-<p id= "demo"> 123456789 </p>
 <br>
 <button type="button" onclick="getServices()">get Service</button>
 <br>
