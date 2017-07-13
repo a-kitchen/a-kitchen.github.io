@@ -16,11 +16,12 @@ function search(){
 	let filterName = document.querySelector('#name').value;
   if (filterName) {
     filters.push({name: filterName});
+	 options.filters = filters;
   }else{
-  //options.acceptAllDevices = true;
+  options.acceptAllDevices = true;
   }
   
-  options.filters = filters;
+ 
 	   
 	
 	navigator.bluetooth.requestDevice(options).then(device => {
