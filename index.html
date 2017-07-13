@@ -21,9 +21,6 @@ function search(){
   options.acceptAllDevices = true;
   }
   
- 
-	   
-	
 	navigator.bluetooth.requestDevice(options).then(device => {
 			console.log('Got device:', device.name);
 			console.log('id:', device.id);
@@ -32,6 +29,9 @@ function search(){
 			document.getElementById("demo").innerHTML="My First JavaScript"+device.name;
 		//	bltr =device.gatt.connect();
 		
+			}).then(device => {
+				document.getElementById("demo").innerHTML="connect";
+			    return device.gatt.connect;
 			}).catch(error => {
 			document.getElementById("demo").innerHTML="error"+error;
 			});
