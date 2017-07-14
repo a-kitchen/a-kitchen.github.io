@@ -8,6 +8,7 @@
 <input id="name" type="text" size=17 placeholder="Device Name">
 <button type="button" onclick="search()">sraech</button>
 <p id= "demo"> 123456789 </p>
+<p  id = "conn"> fals</p>
 <script>
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
@@ -30,7 +31,7 @@ function search(){
 		//	bltr =device.gatt.connect();
 		
 			}).then(device => {
-				document.getElementById("demo").innerHTML="connect";
+				document.getElementById("demo").innerHTML="true";
 			    return device.gatt.connect;
 			}).then(server => {
 			
