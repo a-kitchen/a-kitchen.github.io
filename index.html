@@ -9,6 +9,7 @@
 <button type="button" onclick="search()">sraech</button>
 <p id= "demo"> 123456789 </p>
 <p  id = "conn"> fals</p>
+<p id = "service">Servicefals</p>
 <script>
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
@@ -34,7 +35,7 @@ function search(){
 				document.getElementById("conn").innerHTML="true";
 			    return device.gatt.connect;
 			}).then(server => {
-			
+				document.getElementById("service").innerHTML="trurservcice";
 			return server.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB')
 			})
 			
