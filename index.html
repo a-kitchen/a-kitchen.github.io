@@ -30,7 +30,7 @@ function search(){
 			console.log('Connected:' + device.gatt.connected);
 			document.getElementById("demo").innerHTML="My First JavaScript"+device.name;
 		//	bltr =device.gatt.connect();
-		
+		          return device;
 			}).then(device => {
 				document.getElementById("conn").innerHTML="true";
 			    return device.gatt.connect;
