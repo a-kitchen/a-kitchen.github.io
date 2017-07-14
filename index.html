@@ -29,11 +29,8 @@ function search(){
 			console.log('Connected:' + device.gatt.connected);
 			console.log('Connected:' + device.gatt.connected);
 			document.getElementById("demo").innerHTML="My First JavaScript"+device.name;
-		//	bltr =device.gatt.connect();
-		          return device;
-			}).then(device => {
-				document.getElementById("conn").innerHTML="true";
-			    return device.gatt.connect;
+	return	device.gatt.connect();
+		       
 			}).then(server => {
 				document.getElementById("service").innerHTML="trurservcice";
 			 return server.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB');
