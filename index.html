@@ -36,8 +36,11 @@ function search(){
 			    return device.gatt.connect;
 			}).then(server => {
 				document.getElementById("service").innerHTML="trurservcice";
-			 server.getPrimaryService(['00000000-0000-1000-8000-00805F9B34FB']);
-			})
+			 server.getPrimaryServices('00000000-0000-1000-8000-00805F9B34FB');
+			}).then(service => {
+	
+	              service.getCharacteristic('00000002-0000-1000-8000-00805F9B34FB');
+             })
 			
 			.catch(error => {
 			document.getElementById("demo").innerHTML="error"+error;
