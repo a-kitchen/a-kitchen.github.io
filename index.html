@@ -36,10 +36,10 @@ function search(){
 			
 				
 				
-			 return server.getPrimaryService('00000000-0000-1000-8000-00805-f9b34fb');
+			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
 	
-	              service.getCharacteristic('00000002-0000-1000-8000-00805F9B34FB');
+	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb');
              })
 			
 			.catch(error => {
