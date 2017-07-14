@@ -32,7 +32,12 @@ function search(){
 			}).then(device => {
 				document.getElementById("demo").innerHTML="connect";
 			    return device.gatt.connect;
-			}).catch(error => {
+			}).then(server => {
+			
+			return server.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB')
+			})
+			
+			.catch(error => {
 			document.getElementById("demo").innerHTML="error"+error;
 			});
 	
