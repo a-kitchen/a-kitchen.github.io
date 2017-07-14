@@ -31,12 +31,20 @@ function search(){
 		//	bltr =device.gatt.connect();
 		
 			}).then(device => {
-				document.getElementById("demo").innerHTML="true";
+				document.getElementById("conn").innerHTML="true";
 			    return device.gatt.connect;
 			}).then(server => {
 			
 			return server.getPrimaryService('00000000-0000-1000-8000-00805F9B34FB')
-			})
+			}).then(service => {
+             chosenHeartRateService = service;
+                 return Promise.all([
+             service.getCharacteristic('body_sensor_location')
+            .then(handleBodySensorLocationCharacteristic),
+              .getCharacteristic('heart_rate_measurement')
+              .then(handleHeartRateMeasurementCharacteristic),
+                ]);
+        })
 			
 			.catch(error => {
 			document.getElementById("demo").innerHTML="error"+error;
