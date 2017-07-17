@@ -10,7 +10,7 @@
 <p id= "demo"> 123456789 </p>
 <p  id = "conn"> fals</p>
 <p id = "service">Servicefals</p>
-<p id = "data">DATA</P>
+<p id = "data">DATA</p>
 <script>
 
 function search(){
@@ -44,9 +44,9 @@ function search(){
 			
 			return Promise.all([
 			
-	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'.then(put),
+	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'),
 				  
-				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read),
+				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			
 			]);
 	
@@ -58,10 +58,7 @@ function search(){
 	
 }
 
-function put(characteristic)｛
-   
 
-｝
 
 
 function read(characteristic){
