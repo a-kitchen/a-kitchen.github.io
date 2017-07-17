@@ -10,7 +10,9 @@
 <p id= "demo"> 123456789 </p>
 <p  id = "conn"> fals</p>
 <p id = "service">Servicefals</p>
+<p id = "data">DATA</P>
 <script>
+
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
 	let options = {};
@@ -38,14 +40,42 @@ function search(){
 				
 			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
+			
+			
+			return Promise.all([
+			
+	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'.then(put),
+				  
+				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read),
+			
+			]);
 	
-	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb');
              })
 			
 			.catch(error => {
 			document.getElementById("demo").innerHTML="error"+error;
 			});
 	
+}
+
+function put(characteristic)｛
+   
+
+｝
+
+
+function read(characteristic){
+    return characteristic.startNotifications()
+    .then(char => {
+	   characteristic.addEventListener('characteristicvaluechanged',
+                                    onHeartRateChanged);
+    });
+}
+
+function onHeartRateChanged(event) {
+  let characteristic = event.target;
+  console.log(parseHeartRate(characteristic.value));
+  document.getElementById("data").innerHTML="D"+characteristic.value;
 }
 
 </script>
