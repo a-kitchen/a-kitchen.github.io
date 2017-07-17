@@ -62,11 +62,8 @@ function search(){
 
 
 function read(characteristic){
-    return characteristic.startNotifications()
-    .then(char => {
-	   characteristic.addEventListener('characteristicvaluechanged',
-                                    onHeartRateChanged);
-    });
+    return characteristic.startNotifications();
+
 }
 
 function onHeartRateChanged(event) {
