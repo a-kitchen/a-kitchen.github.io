@@ -13,9 +13,6 @@
 <p id = "data">DATA</p>
 <script>
 
-let chosenHeartRateService = null;
- 
-
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
 	let options = {};
@@ -28,6 +25,9 @@ function search(){
   options.acceptAllDevices = true;
   }
   
+     let optionalServices = ['00000003-0000-1000-8000-00805f9b34fb'];
+  options.optionalServices =optionalServices;
+  
 	navigator.bluetooth.requestDevice(options).then(device => {
 			console.log('Got device:', device.name);
 			console.log('id:', device.id);
@@ -39,13 +39,16 @@ function search(){
 			}).then(server => {
 				document.getElementById("service").innerHTML="trurservcice";
 			
-				
-				
 			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
-			  chosenHeartRateService = service;
 			
-		
+			return Promise.all([
+			
+	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'),
+				  
+				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
+			
+			]);
 	
              })
 			
@@ -55,23 +58,19 @@ function search(){
 	
 }
 
-
-
-
-function read(){
-
-chosenHeartRateService.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(characteristic =>{
-  characteristic.startNotifications;
-   document.getElementById("data").innerHTML="D"+characteristic.value;
- 
-  });
- 
+function read(characteristic){
+    return characteristic.startNotifications() 
+    .then(char => {
+	   characteristic.addEventListener('characteristicvaluechanged',
+                                    onHeartRateChanged);
+    });
 }
 
-   
-
-
-
+function onHeartRateChanged(event) {
+  let characteristic = event.target;
+  console.log(parseHeartRate(characteristic.value));
+  document.getElementById("data").innerHTML="D"+characteristic.value;
+}
 
 </script>
 
