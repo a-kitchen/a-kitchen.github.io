@@ -50,11 +50,12 @@ function search(){
 
 function read(characteristic){
     return characteristic.startNotifications() 
-	document.getElementById("data").innerHTML="D";
     .then(char => {
+	document.getElementById("data").innerHTML="D";
 	   characteristic.addEventListener('characteristicvaluechanged',
                                     onHeartRateChanged);
     });
+	
 }
 
 function onHeartRateChanged(event) {
