@@ -8,7 +8,6 @@
 <input id="name" type="text" size=17 placeholder="Device Name">
 <button type="button" onclick="search()">sraech</button>
 <p id= "demo"> 123456789 </p>
-<p  id = "conn"> fals</p>
 <p id = "service">Servicefals</p>
 <p id = "data">DATA</p>
 <script>
@@ -16,10 +15,7 @@
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
 	let options = {
-	optionalServices:['00000000-0000-1000-8000-00805f9b34fb'],
-	optionalServices:['00000001-0000-1000-8000-00805f9b34fb'],
-	optionalServices:['00000002-0000-1000-8000-00805f9b34fb'],
-	optionalServices:['00000003-0000-1000-8000-00805f9b34fb'],
+	optionalServices:['00000000-0000-1000-8000-00805f9b34fb']
 	};
 	let filters = [];
 	let filterName = document.querySelector('#name').value;
@@ -47,7 +43,7 @@ function search(){
 			]);
 	
              }).catch(error => {
-			document.getElementById("demo").innerHTML="error"+error;
+			document.getElementById("demo").innerHTML="error:"+error;
 			});
 	
 }
