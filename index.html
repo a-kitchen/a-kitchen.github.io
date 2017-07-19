@@ -15,7 +15,9 @@
 
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
-	let options = {};
+	let options = {
+	optionalServices:['00000003-0000-1000-8000-00805f9b34fb']
+	};
 	let filters = [];
 	let filterName = document.querySelector('#name').value;
   if (filterName) {
@@ -25,34 +27,23 @@ function search(){
   options.acceptAllDevices = true;
   }
   
-     let optionalServices = ['00000003-0000-1000-8000-00805f9b34fb'];
-  options.optionalServices =optionalServices;
+
   
 	navigator.bluetooth.requestDevice(options).then(device => {
-			console.log('Got device:', device.name);
-			console.log('id:', device.id);
-			console.log('Connected:' + device.gatt.connected);
-			console.log('Connected:' + device.gatt.connected);
-			document.getElementById("demo").innerHTML="My First JavaScript"+device.name;
 	return	device.gatt.connect();
-		       
-			}).then(server => {
+	
+		       }).then(server => {
 				document.getElementById("service").innerHTML="trurservcice";
 			
 			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
 			
 			return Promise.all([
-			
 	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'),
-				  
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
-			
 			]);
 	
-             })
-			
-			.catch(error => {
+             }).catch(error => {
 			document.getElementById("demo").innerHTML="error"+error;
 			});
 	
