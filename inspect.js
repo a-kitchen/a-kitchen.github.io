@@ -23,14 +23,13 @@ function search(){
 			}).then(service => {
 			
 			return Promise.all([
-	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'),
+	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(write),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
 	
              }).catch(error => {
-			document.getElementById("demo").innerHTML="error:"+error;
+			document.getElementById("demo").innerHTML=error;
 			});
-	
 }
 
 function read(characteristic){
@@ -44,8 +43,12 @@ function read(characteristic){
 		
 	});
 	
-	
-	
+}
+
+function write(characteristic){
+	let resetEnergyExpended = new Uint8Array([1]);
+	characteristic.writeValue(resetEnergyExpended);
+	document.getElementById("service").innerHTML="write";
 }
 
 
