@@ -1,4 +1,6 @@
 
+  let chosenHeartRateService = null;
+
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
 	let options = {
@@ -13,6 +15,7 @@ function search(){
      options.acceptAllDevices = true;
     }
   
+  
 	navigator.bluetooth.requestDevice(options).then(device => {
 	return	device.gatt.connect();
 	
@@ -21,9 +24,8 @@ function search(){
 			
 			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
-			
+			 chosenHeartRateService = service;
 			return Promise.all([
-	              service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(write),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
 	
@@ -45,10 +47,16 @@ function read(characteristic){
 	
 }
 
-function write(characteristic){
-	let resetEnergyExpended = new Uint8Array([1]);
-	characteristic.writeValue(resetEnergyExpended);
-	document.getElementById("service").innerHTML="write";
+
+function write(){
+	 if (chosenHeartRateService) {
+		  return chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb')
+    .then(controlPoint => {
+    let resetEnergyExpended = new Uint8Array([1]);
+    return controlPoint.writeValue(resetEnergyExpended);
+  });
+
+    }
 }
 
 
