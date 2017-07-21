@@ -24,7 +24,7 @@ function search(){
 			 chosenHeartRateService = service;
 			return Promise.all([
 			service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb'),
-			 service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'),
+			 service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(write),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
 	
@@ -46,15 +46,13 @@ function read(characteristic){
 }
 
 
-function write(){
-	 if (chosenHeartRateService) {
-		  return chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb')
-    .then(controlPoint => {
+function write(characteristic){
+	
     let resetEnergyExpended = new Uint8Array.of(65,75);
-    return controlPoint.writeValue(resetEnergyExpended);
-  });
+    return characteristic.writeValue(resetEnergyExpended);
 
-    }
+
+    
 }
 
 
