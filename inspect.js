@@ -23,7 +23,7 @@ function search(){
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
-			      service.getCharacteristic('0000001-0000-1000-8000-00805f9b34fb'),
+			      service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb'),
 			      service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb'),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
