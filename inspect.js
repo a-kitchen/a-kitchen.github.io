@@ -23,8 +23,7 @@ function search(){
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
-			  
-			  
+			      service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
 	
@@ -33,17 +32,25 @@ function search(){
 			});
 }
 
+function Notifications(characteristic){
+	 characteristic.startNotifications();
+}
+
 function read(characteristic){
-     characteristic.startNotifications();
- 
-	
+   
+	return characteristic.readValue().then(sensorLocationData => {
+		
+		let sensorLocation = sensorLocationData.getUint8(1);
+			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
+		
+	});
 	
 }
 
 
 function write(){
 	 if (chosenHeartRateService) {
-		  return chosenHeartRateService.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb')
+		  return chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb')
     .then(controlPoint => {
     let resetEnergyExpended = new Uint8Array.of(65,75);
     return controlPoint.writeValue(resetEnergyExpended);
