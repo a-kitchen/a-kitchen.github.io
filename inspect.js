@@ -1,5 +1,5 @@
 
-  let chosenHeartRateService = null;
+ let chosenHeartRateService = null;
 
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
@@ -15,13 +15,10 @@ function search(){
      options.acceptAllDevices = true;
     }
   
-  
 	navigator.bluetooth.requestDevice(options).then(device => {
 	return	device.gatt.connect();
 	
-		       }).then(server => {
-				document.getElementById("service").innerHTML="trurservcice";
-			
+		       }).then(server => {		
 			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
 			 chosenHeartRateService = service;
@@ -37,11 +34,10 @@ function search(){
 function read(characteristic){
      characteristic.startNotifications();
  
-	
 	return characteristic.readValue().then(sensorLocationData => {
 		
 		let sensorLocation = sensorLocationData.getUint8(1);
-			document.getElementById("sensorLocation").innerHTML="sensorLocation"+sensorLocation;
+			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
 		
 	});
 	
