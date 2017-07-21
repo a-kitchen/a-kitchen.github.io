@@ -48,7 +48,7 @@ function write(){
 	 if (chosenHeartRateService) {
 		  return chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb')
     .then(controlPoint => {
-    let resetEnergyExpended = new Uint8Array([1]);
+    let resetEnergyExpended = new Uint8Array("41","4b");
     return controlPoint.writeValue(resetEnergyExpended);
   });
 
