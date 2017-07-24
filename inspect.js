@@ -41,8 +41,11 @@ function read(characteristic){
    
 	return characteristic.readValue().then(sensorLocationData => {
 		
+		if(sensorLocationData.zIndex >1){
+		
 		let sensorLocation = sensorLocationData.getUint8(1);
 			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
+		}
 		
 	});
 	
@@ -52,7 +55,8 @@ function read(characteristic){
 
 function w(characteristic){
 
-  
+    let resetEnergyExpended = new Uint8Array(65,75);
+    controlPoint.writeValue(resetEnergyExpended);
 }
 
 
