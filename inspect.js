@@ -34,7 +34,7 @@ function search(){
 }
 
 function Notifications(characteristic){
-	 characteristic.startNotifications();
+	 characteristic.startNotifications();  
 }
 
 function read(characteristic){
@@ -52,7 +52,7 @@ function read(characteristic){
 
 function w(characteristic){
 
-    let resetEnergyExpended = new Uint8Array.of(65,75);
+    let resetEnergyExpended = new Uint8Array(65,75);
     controlPoint.writeValue(resetEnergyExpended);
 }
 
