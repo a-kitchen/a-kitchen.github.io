@@ -56,7 +56,7 @@ function read(characteristic){
 function w(characteristic){
 
     let resetEnergyExpended = new Uint8Array(65,75);
-    controlPoint.writeValue(resetEnergyExpended);
+    characteristic.writeValue(resetEnergyExpended);
 }
 
 
