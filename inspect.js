@@ -36,20 +36,15 @@ function search(){
 function Notifications(characteristic){
 	 characteristic.startNotifications();  
 	 
-	 characteristic.getDescriptor('00002902-0000-1000-8000-00805f9b34fb')
-	 .then(Descriptor =>{
-		Descriptor.writeValue(array [0x01,0x00]);
-		 
-	 });
 }
 
 function read(characteristic){
    
 	return characteristic.readValue().then(sensorLocationData => {
 		
-		if(sensorLocationData.zIndex >1){
+		if(sensorLocationData.zIndex >0){
 		
-		let sensorLocation = sensorLocationData.getUint8(1);
+		let sensorLocation = sensorLocationData.getUint8(0);
 			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
 		}
 		
