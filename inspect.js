@@ -35,6 +35,12 @@ function search(){
 
 function Notifications(characteristic){
 	 characteristic.startNotifications();  
+	 
+	 characteristic.getDescriptor('00002902-0000-1000-8000-00805f9b34fb')
+	 .then(bluetoothGATTDescriptor =>{
+		 bluetoothGATTDescriptor.writeValue(array [0x01,0x00]);
+		 
+	 });
 }
 
 function read(characteristic){
