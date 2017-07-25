@@ -54,7 +54,9 @@ function read(characteristic){
 
 
 function w(characteristic){
-
+    let resetEnergyExpended = new Uint8Array([65,75]);
+    characteristic.writeValue(resetEnergyExpended);
+	document.getElementById("w").innerHTML="write";
 }
 
 
