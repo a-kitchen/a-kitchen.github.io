@@ -23,7 +23,7 @@ function search(){
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
-			      service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
+			      service. ('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
 				  service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
@@ -55,7 +55,7 @@ function read(characteristic){
 
 
 function w(characteristic){
-    let resetEnergyExpended = new Uint8Array([65,75]);
+    let resetEnergyExpended = new Uint8Array([34,8,35,7]);
     characteristic.writeValue(resetEnergyExpended);
 	document.getElementById("w").innerHTML="write";
 }
