@@ -23,7 +23,8 @@ function search(){
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
-			      service. ('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
+			      service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
+			      service. getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
 				  service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
@@ -42,9 +43,9 @@ function read(characteristic){
    
 	return characteristic.readValue().then(sensorLocationData => {
 		
-		if(sensorLocationData.zIndex >0){
+		if(sensorLocationData.zIndex >1){
 		
-		let sensorLocation = sensorLocationData.getUint8(0);
+		let sensorLocation = sensorLocationData.getUint8(1);
 			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
 		}
 		
