@@ -23,8 +23,7 @@ function search(){
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
-			      service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
-			      service. getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(Notifications),
+			
 				  service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
 				  service.getCharacteristic('00000003-0000-1000-8000-00805f9b34fb').then(read)
 			]);
@@ -34,12 +33,24 @@ function search(){
 			});
 }
 
-function Notifications(characteristic){
-	 characteristic.startNotifications();  
+
+
+
+function Notifications(){
+	if(chosenHeartRateService){
+	chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(characteristic =>{
+	 characteristic.startNotifications(); 
+	});
+	}
+	
+ 
 	 
 }
 
+
 function read(characteristic){
+	
+	Notifications();
    
 	return characteristic.readValue().then(sensorLocationData => {
 		
@@ -58,6 +69,7 @@ function read(characteristic){
 function w(characteristic){
     let resetEnergyExpended = new Uint8Array([34,8,35,7]);
     characteristic.writeValue(resetEnergyExpended);
+	Notifications();
 	document.getElementById("w").innerHTML="write";
 }
 
