@@ -51,6 +51,9 @@ function Notifications(){
 function read(characteristic){
 	
 	Notifications();
+	
+	characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
+	
    
 	return characteristic.readValue().then(sensorLocationData => {
 		
@@ -62,6 +65,11 @@ function read(characteristic){
 		
 	});
 	
+}
+
+function handleCharacteristicValueChanged(event) {
+  var value = event.target.value;
+  	document.getElementById("data").innerHTML="Received"+sensorLocation;
 }
 
 
