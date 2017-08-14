@@ -1,11 +1,12 @@
 
+ var serviceUuid = "00000000-0000-1000-8000-00805f9b34fb";
  let chosenHeartRateService = null;
+ 
 
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
-	let options = {
-	optionalServices:['00000000-0000-1000-8000-00805f9b34fb']
-	};
+	let options = {};
+	optios.optionalServices = [serviceUuid];
 	let filters = [];
 	let filterName = document.querySelector('#name').value;
     if (filterName) {
@@ -19,7 +20,7 @@ function search(){
 	return	device.gatt.connect();
 	
 		       }).then(server => {		
-			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
+			 return server.getPrimaryService(serviceUuid);
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
@@ -42,9 +43,6 @@ function Notifications(){
 	 characteristic.startNotifications(); 
 	});
 	}
-	
- 
-	 
 }
 
 
@@ -66,10 +64,12 @@ function read(characteristic){
 	});
 	
 }
-
+var tmp_count=0;
 function handleCharacteristicValueChanged(event) {
-  var value = event.target.value;
-  	document.getElementById("data").innerHTML="Received"+sensorLocation;
+  //var value = event.target.value;
+  	//document.getElementById("data").innerHTML="Received"+sensorLocation;
+	  tmp_count++;
+    	document.getElementById("data").innerHTML="Received"+tmp_count;
 }
 
 
