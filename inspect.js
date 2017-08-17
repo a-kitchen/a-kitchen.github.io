@@ -8,10 +8,23 @@ function search(){
 		optionalServices:['00000000-0000-1000-8000-00805f9b34fb']
 	};
 	let filters = [];
-	let filterName = document.querySelector('#name').value;
+	
+	let  services = document.querySelector('querySelector').value;
+	let  filterName = document.querySelector('#name').value;
+	let  Prefix = document.querySelector('Prefix').value;
+	if(services || filterName ||  Prefix){
     if (filterName) {
     filters.push({name:filterName});
+	}
+	 if(services){
+		 filters.push({services: [services]});
+	 }
+	 if(Prefix){
+		  filters.push({namePrefix: Prefix});
+	 }
 	 options.filters = filters;
+	 
+	 
     }else{
      options.acceptAllDevices = true;
     }
