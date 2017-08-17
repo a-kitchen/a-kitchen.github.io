@@ -9,10 +9,10 @@ function search(){
 	};
 	let filters = [];
 	
-	let  services = document.querySelector('querySelector').value;
+	let  services = document.querySelector('#services').value;
 	let  filterName = document.querySelector('#name').value;
-	let  Prefix = document.querySelector('Prefix').value;
-	if(services || filterName ||  Prefix){
+	let  Prefix = document.querySelector('#Prefix').value;
+	if(services || filterName || Prefix){
     if (filterName) {
     filters.push({name:filterName});
 	}
