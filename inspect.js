@@ -64,7 +64,7 @@ function read(characteristic){
 	
 	//Notifications();
 	
-	//characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
+	characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
 	
    
 	//return characteristic.readValue().then(sensorLocationData => {
@@ -78,11 +78,12 @@ function read(characteristic){
 	//});
 	
 }
-
+var tmp_count = 0 ;
 function handleCharacteristicValueChanged(event) {
   //var value = event.target.value;
   	//document.getElementById("data").innerHTML="Received"+sensorLocation;
-	
+	tmp_count ++ ;
+		document.getElementById("data").innerHTML="Received"+tmp_count;
 }
 
 
