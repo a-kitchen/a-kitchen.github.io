@@ -69,9 +69,9 @@ function read(characteristic){
 	
 	return characteristic.readValue().then(sensorLocationData => {
 		
-		if(sensorLocationData.zIndex >1){
+		if(sensorLocationData.zIndex >0){
 	
-		let sensorLocation = sensorLocationData.getUint8(1);
+		let sensorLocation = sensorLocationData.getUint8(0);
 			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
 		}
 		
