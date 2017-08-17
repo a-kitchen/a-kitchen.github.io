@@ -22,7 +22,7 @@ function search(){
 	return	device.gatt.connect();
 	
 		       }).then(server => {		
-			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
+			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb'ad);
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
