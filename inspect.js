@@ -61,10 +61,13 @@ function Notifications(){
 
 
 function read(characteristic){
+  return characteristic.startNotifications()
+  .then(char => {
+    characteristic.addEventListener('characteristicvaluechanged',
+                                    handleCharacteristicValueChanged);
+  });
 	
-	//Notifications();
-	
-	characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
+	//characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
 	
    
 	//return characteristic.readValue().then(sensorLocationData => {
