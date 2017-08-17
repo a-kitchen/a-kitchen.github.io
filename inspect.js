@@ -1,12 +1,13 @@
 
- var serviceUuid = "00000000-0000-1000-8000-00805f9b34fb";
  let chosenHeartRateService = null;
  
 
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
-	let options = {};
-	optios.optionalServices = [serviceUuid];
+	let options = {
+		optionalServices:['00000000-0000-1000-8000-00805f9b34fb']
+	};
+	
 	let filters = [];
 	let filterName = document.querySelector('#name').value;
     if (filterName) {
@@ -17,10 +18,11 @@ function search(){
     }
   
 	navigator.bluetooth.requestDevice(options).then(device => {
+		
 	return	device.gatt.connect();
 	
 		       }).then(server => {		
-			 return server.getPrimaryService(serviceUuid);
+			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
