@@ -49,27 +49,24 @@ function search(){
 }
 
 
-
-
-function Notifications(){
-	if(chosenHeartRateService){
-	chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(characteristic =>{
-	 characteristic.startNotifications(); 
-	});
-	}
-}
+//function Notifications(){
+	//if(chosenHeartRateService){
+	//chosenHeartRateService.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(characteristic =>{
+	// characteristic.startNotifications(); 
+	//});
+	//}
+//}
 
 
 function read(characteristic){
   return characteristic.startNotifications()
   .then(char => {
-    characteristic.addEventListener('characteristicvaluechanged',
-                                   onHeartRateChanged );
+    characteristic.addEventListener('characteristicvaluechanged',onHeartRateChanged);
   });
 	
 }
 //var tmp_count = 0 ;
-function onHeartRateChanged (event) {
+function onHeartRateChanged(event) {
      var value = event.target.value;
   	document.getElementById("data").innerHTML="Received"+sensorLocation;
 	//tmp_count ++ ;
