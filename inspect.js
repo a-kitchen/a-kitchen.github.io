@@ -17,7 +17,7 @@ function search(){
     filters.push({name:filterName});
 	}
 	 if(services){
-		 filters.push({services: [services]});
+		 filters.push({services:[services]});
 	 }
 	 if(Prefix){
 		  filters.push({namePrefix: Prefix});
