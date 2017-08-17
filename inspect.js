@@ -61,24 +61,21 @@ function Notifications(){
 
 
 function read(characteristic){
-  return characteristic.startNotifications()
-  .then(char => {
-    characteristic.addEventListener('characteristicvaluechanged',
-                                    handleCharacteristicValueChanged);
-  });
+//  return characteristic.startNotifications()
+ // .then(char => {
+   // characteristic.addEventListener('characteristicvaluechanged',
+         //                           handleCharacteristicValueChanged);
+  //});
 	
-	//characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
+	return characteristic.readValue().then(sensorLocationData => {
+		
+		if(sensorLocationData.zIndex >1){
 	
-   
-	//return characteristic.readValue().then(sensorLocationData => {
+		let sensorLocation = sensorLocationData.getUint8(1);
+			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
+		}
 		
-	//	if(sensorLocationData.zIndex >1){
-		
-		//let sensorLocation = sensorLocationData.getUint8(1);
-		//	document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
-		//}
-		
-	//});
+	});
 	
 }
 var tmp_count = 0 ;
