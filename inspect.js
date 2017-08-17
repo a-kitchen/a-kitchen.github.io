@@ -86,7 +86,7 @@ function handleCharacteristicValueChanged(event) {
   //var value = event.target.value;
   	//document.getElementById("data").innerHTML="Received"+sensorLocation;
 	tmp_count ++ ;
-		document.getElementById("data").innerHTML="Received"+tmp_count;
+		document.getElementById("data").innerHTML=tmp_count;
 }
 
 
