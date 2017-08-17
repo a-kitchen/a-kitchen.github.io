@@ -7,7 +7,6 @@ function search(){
 	let options = {
 		optionalServices:['00000000-0000-1000-8000-00805f9b34fb']
 	};
-	
 	let filters = [];
 	let filterName = document.querySelector('#name').value;
     if (filterName) {
