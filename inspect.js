@@ -10,7 +10,7 @@ function search(){
 	let filters = [];
 	let filterName = document.querySelector('#name').value;
     if (filterName) {
-    filters.push({name: filterName});
+    filters.push({name:filterName});
 	 options.filters = filters;
     }else{
      options.acceptAllDevices = true;
