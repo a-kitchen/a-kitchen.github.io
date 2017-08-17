@@ -92,10 +92,10 @@ function handleCharacteristicValueChanged(event) {
 
 
 function w(characteristic){
-    //let resetEnergyExpended = new Uint8Array([34,8,35,7]);
-   // characteristic.writeValue(resetEnergyExpended);
-	//Notifications();
-	//document.getElementById("w").innerHTML="write";
+    let resetEnergyExpended = new Uint8Array([34,8,35,7]);
+    characteristic.writeValue(resetEnergyExpended);
+	Notifications();
+	document.getElementById("w").innerHTML="write";
 }
 
 
