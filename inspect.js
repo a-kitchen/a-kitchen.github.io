@@ -61,25 +61,15 @@ function Notifications(){
 
 
 function read(characteristic){
-//  return characteristic.startNotifications()
- // .then(char => {
-   // characteristic.addEventListener('characteristicvaluechanged',
-         //                           handleCharacteristicValueChanged);
-  //});
-	
-	return characteristic.readValue().then(sensorLocationData => {
-		
-		if(sensorLocationData.zIndex >0){
-	
-		let sensorLocation = sensorLocationData.getUint8(0);
-			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
-		}
-		
-	});
+  return characteristic.startNotifications()
+  .then(char => {
+    characteristic.addEventListener('characteristicvaluechanged',
+         //                           onHeartRateChanged );
+  });
 	
 }
 var tmp_count = 0 ;
-function handleCharacteristicValueChanged(event) {
+function onHeartRateChanged (event) {
   //var value = event.target.value;
   	//document.getElementById("data").innerHTML="Received"+sensorLocation;
 	tmp_count ++ ;
