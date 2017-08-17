@@ -17,11 +17,7 @@ function search(){
      options.acceptAllDevices = true;
     }
   
-	navigator.bluetooth.requestDevice({
-  filters: [{
-    services: ['00000000-0000-1000-8000-00805f9b34fb'],
-  }]
-}).then(device => {
+	navigator.bluetooth.requestDevice(options).then(device => {
 		
 	return	device.gatt.connect();
 	
