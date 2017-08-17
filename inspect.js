@@ -22,7 +22,7 @@ function search(){
 	return	device.gatt.connect();
 	
 		       }).then(server => {		
-			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb'ad);
+			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
@@ -32,7 +32,7 @@ function search(){
 			]);
 	
              }).catch(error => {
-			document.getElementById("demo").innerHTML=error;
+			          document.getElementById("demo").innerHTML=error;
 			});
 }
 
@@ -50,28 +50,27 @@ function Notifications(){
 
 function read(characteristic){
 	
-	Notifications();
+	//Notifications();
 	
-	characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
+	//characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
 	
    
-	return characteristic.readValue().then(sensorLocationData => {
+	//return characteristic.readValue().then(sensorLocationData => {
 		
-		if(sensorLocationData.zIndex >1){
+	//	if(sensorLocationData.zIndex >1){
 		
-		let sensorLocation = sensorLocationData.getUint8(1);
-			document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
-		}
+		//let sensorLocation = sensorLocationData.getUint8(1);
+		//	document.getElementById("data").innerHTML="sensorLocation"+sensorLocation;
+		//}
 		
-	});
+	//});
 	
 }
-var tmp_count=0;
+
 function handleCharacteristicValueChanged(event) {
   //var value = event.target.value;
   	//document.getElementById("data").innerHTML="Received"+sensorLocation;
-	  tmp_count++;
-    	document.getElementById("data").innerHTML="Received"+tmp_count;
+	
 }
 
 
