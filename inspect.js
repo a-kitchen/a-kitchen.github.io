@@ -9,15 +9,19 @@ function search(){
 	};
 	
 	let filters = [];
-	//let filterName = document.querySelector('#name').value;
-   // if (filterName) {
+	let filterName = document.querySelector('#name').value;
+    if (filterName) {
     filters.push({name: filterName});
 	 options.filters = filters;
-   // }else{
-   //  //options.acceptAllDevices = true;
-   // }
+    }else{
+     options.acceptAllDevices = true;
+    }
   
-	navigator.bluetooth.requestDevice(options).then(device => {
+	navigator.bluetooth.requestDevice({
+  filters: [{
+    services: ['00000000-0000-1000-8000-00805f9b34fb'],
+  }]
+}).then(device => {
 		
 	return	device.gatt.connect();
 	
