@@ -95,7 +95,7 @@ function search(){
 			 chosenHeartRateService = service;
 			return Promise.all([
 			
-				  //service.getCharacteristic(uuid_writ).then(put),
+				  service.getCharacteristic(uuid_writ).then(put),
 				  service.getCharacteristic(uuid_down).then(read)
 			]);
 	
