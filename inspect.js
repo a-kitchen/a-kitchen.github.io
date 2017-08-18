@@ -104,13 +104,6 @@ function search(){
 			});
 }
 
-//function val(characteristic){
-//return characteristic.readValue()
-  //.then(sensorLocationData => {
-    //let sensorLocation = sensorLocationData.getUint8(0);
-	//document.getElementById("data").innerHTML="+++"+sensorLocation;
-  //});
-//}
 
 function read(characteristic){
   return characteristic.startNotifications()
@@ -267,7 +260,6 @@ function onHeartRateChanged(event) {
             console.log('k: ' + k + ', v: ' + v);
         }
     }
-	
 	
 }
 
