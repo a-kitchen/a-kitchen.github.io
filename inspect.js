@@ -62,11 +62,9 @@ lvol = 0;
 
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
-	let options = {
-		optionalServices:[uuid_tnnl]
-	};
-	let filters = [];
+	let options = {optionalServices:[uuid_tnnl]};
 	
+	let filters = [];
 	let  services = document.querySelector('#services').value;
 	let  filterName = document.querySelector('#name').value;
 	let  Prefix = document.querySelector('#Prefix').value;
@@ -104,7 +102,13 @@ function search(){
 }
 
 function put(characteristic){
-
+	//if(characteristic == null){
+	//document.getElementById("w").innerHTML="w";
+	//characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
+	// let resetEnergyExpended = new Uint8Array([34,8,35,7]);
+    //characteristic.writeValue(resetEnergyExpended);
+	//document.getElementById("w").innerHTML="wr";
+//	}else{
     let resetEnergyExpended = new Uint8Array([34,8,35,7]);
     characteristic.writeValue(resetEnergyExpended);
 	document.getElementById("w").innerHTML="write";
@@ -124,10 +128,10 @@ function putText(){
 	var j = parseInt(set);
 	var star = j/256;
 	var dest = j%256;
-	let resetEnergyExpended = new Uint8Array([34,star,35,dest]);
+	let rese= new Uint8Array([34,star,35,dest]);
 	document.getElementById("w").innerHTML="w";
 	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
-   characteristic.writeValue(resetEnergyExpended);
+   characteristic.writeValue(rese);
 	document.getElementById("w").innerHTML="wr";
 	
 	
