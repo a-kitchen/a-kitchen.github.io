@@ -104,12 +104,39 @@ function search(){
 			});
 }
 
+function put(characteristic){
+	//if(characteristic == null){
+	//document.getElementById("w").innerHTML="w";
+	//characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
+	// let resetEnergyExpended = new Uint8Array([34,8,35,7]);
+    //characteristic.writeValue(resetEnergyExpended);
+	//document.getElementById("w").innerHTML="wr";
+//	}else{
+    let resetEnergyExpended = new Uint8Array([34,8,35,7]);
+    characteristic.writeValue(resetEnergyExpended);
+	document.getElementById("w").innerHTML="write";
+}
+
 
 function read(characteristic){
   return characteristic.startNotifications()
   .then(characteristic => {
     characteristic.addEventListener('characteristicvaluechanged',onHeartRateChanged);
   });
+	
+}
+
+function putText(){
+	let  s = document.querySelector('#set').value;
+	var j = parseInt(s);
+	var star = j/256;
+	var dest = j%256;
+	let resetEnergyExpended = new Uint8Array([34,star,35,dest]);
+	document.getElementById("w").innerHTML="w";
+	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
+   characteristic.writeValue(resetEnergyExpended);
+	document.getElementById("w").innerHTML="wr";
+	
 	
 }
 
@@ -263,18 +290,7 @@ function onHeartRateChanged(event) {
 	
 }
 
-function put(characteristic){
-	if(characteristic == null){
-	document.getElementById("w").innerHTML="w";
-	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
-	 let resetEnergyExpended = new Uint8Array([34,8,35,7]);
-    characteristic.writeValue(resetEnergyExpended);
-	document.getElementById("w").innerHTML="wr";
-	}else{
-    let resetEnergyExpended = new Uint8Array([34,8,35,7]);
-    characteristic.writeValue(resetEnergyExpended);
-	document.getElementById("w").innerHTML="write";}
-}
+
 
 
 
