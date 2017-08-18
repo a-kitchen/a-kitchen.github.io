@@ -37,7 +37,7 @@ function search(){
 			 chosenHeartRateService = service;
 			return Promise.all([
 			
-				  service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
+				 // service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
 				  service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(read)
 			]);
 	
@@ -64,10 +64,10 @@ function read(characteristic){
 
 var tmp_count = 0 ;
 function onHeartRateChanged(event) {
-     //var value = event.target.value;
-  //	document.getElementById("data").innerHTML="Received"+sensorLocation;
-	tmp_count ++ ;
-	document.getElementById("data").innerHTML='aaaaaaaa';
+     var value = event.target.value;
+  	document.getElementById("data").innerHTML="Received"+sensorLocation;
+	//tmp_count ++ ;
+	//document.getElementById("data").innerHTML='aaaaaaaa';
 }
 
 function w(characteristic){
