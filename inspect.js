@@ -129,7 +129,6 @@ function putText(){
 	var star = j/256;
 	var dest = j%256;
 	let rese= new Uint8Array([34,star,35,dest]);
-	document.getElementById("w").innerHTML="w";
 	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
     Promise.all([
 	 characteristic.writeValue(rese);
