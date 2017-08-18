@@ -127,8 +127,8 @@ function read(characteristic){
 }
 
 function putText(){
-	let  s = document.querySelector('#set').value;
-	var j = parseInt(s);
+	let  set = document.querySelector('#set').value;
+	var j = parseInt(set);
 	var star = j/256;
 	var dest = j%256;
 	let resetEnergyExpended = new Uint8Array([34,star,35,dest]);
@@ -141,12 +141,12 @@ function putText(){
 }
 
 function onHeartRateChanged(event) {		 	
-    var s = event.target.value;
-	document.getElementById("data").innerHTML="Received"+s;
-    var i, n = s.byteLength;
+    var value  = event.target.value;
+	document.getElementById("data").innerHTML="Received"+value ;
+    var i, n = value.byteLength;
     for (i = 0; i < n;){
-        var k = s.getInt8(i++);
-        var v = s.getInt8(i++);
+        var k = value.getInt8(i++);
+        var v = value.getInt8(i++);
         switch(k){
         case 0x22:
             lpwr = v;
