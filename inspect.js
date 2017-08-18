@@ -140,8 +140,9 @@ function putText(){
 	
 }
 
-function onHeartRateChanged(event) {
+function onHeartRateChanged(event) {		 	
     var s = event.target.value;
+	document.getElementById("data").innerHTML="Received"+s;
     var i, n = s.byteLength;
     for (i = 0; i < n;){
         var k = s.getInt8(i++);
