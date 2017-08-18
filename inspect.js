@@ -67,7 +67,7 @@ function onHeartRateChanged(event) {
      //var value = event.target.value;
   //	document.getElementById("data").innerHTML="Received"+sensorLocation;
 	tmp_count ++ ;
-	document.getElementById("data").innerHTML='aaaaaaaa'+tmp_count;
+	document.getElementById("data").innerHTML='aaaaaaaa';
 }
 
 function w(characteristic){
