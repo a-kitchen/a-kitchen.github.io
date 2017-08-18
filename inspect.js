@@ -23,8 +23,6 @@ function search(){
 		  filters.push({namePrefix: Prefix});
 	 }
 	 options.filters = filters;
-	 
-	 
     }else{
      options.acceptAllDevices = true;
     }
@@ -39,7 +37,7 @@ function search(){
 			 chosenHeartRateService = service;
 			return Promise.all([
 			
-				  service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
+				  //service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
 				  service.getCharacteristic('00000006-0000-1000-8000-00805f9b34fb').then(val),
 				  service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(read)
 			]);
@@ -48,7 +46,6 @@ function search(){
 			          document.getElementById("demo").innerHTML=error;
 			});
 }
-
 
 function val(characteristic){
 return characteristic.readValue()
@@ -65,6 +62,7 @@ function read(characteristic){
   });
 	
 }
+
 var tmp_count = 0 ;
 function onHeartRateChanged(event) {
      //var value = event.target.value;
@@ -72,8 +70,6 @@ function onHeartRateChanged(event) {
 	tmp_count ++ ;
 		document.getElementById("data").innerHTML=tmp_count;
 }
-
-
 
 function w(characteristic){
     let resetEnergyExpended = new Uint8Array([34,8,35,7]);
