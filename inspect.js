@@ -71,9 +71,15 @@ function onHeartRateChanged(event) {
 }
 
 function w(characteristic){
+	if(characteristic == null){
+	characteristic = chosenHeartRateService.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb');
+	 let resetEnergyExpended = new Uint8Array([34,8,35,7]);
+    characteristic.writeValue(resetEnergyExpended);
+	document.getElementById("w").innerHTML="wr";
+	}else{
     let resetEnergyExpended = new Uint8Array([34,8,35,7]);
     characteristic.writeValue(resetEnergyExpended);
-	document.getElementById("w").innerHTML="write";
+	document.getElementById("w").innerHTML="write";}
 }
 
 
