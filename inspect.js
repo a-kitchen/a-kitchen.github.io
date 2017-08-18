@@ -145,6 +145,7 @@ function onHeartRateChanged(event) {
     for (i = 0; i < n;){
         var k = value.getInt8(i++);
         var v = value.getInt8(i++);
+			document.getElementById("data").innerHTML="Received"+k+"src"+i+"desr"+v;
         switch(k){
         case 0x22:
             lpwr = v;
