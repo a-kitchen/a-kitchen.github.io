@@ -95,7 +95,7 @@ function search(){
 			 chosenHeartRateService = service;
 			return Promise.all([
 			
-				// service.getCharacteristic(uuid_writ).then(w),
+				// service.getCharacteristic(uuid_writ).then(put),
 				  service.getCharacteristic(uuid_down).then(read)
 			]);
 	
@@ -104,13 +104,13 @@ function search(){
 			});
 }
 
-function val(characteristic){
-return characteristic.readValue()
-  .then(sensorLocationData => {
-    let sensorLocation = sensorLocationData.getUint8(0);
-	document.getElementById("data").innerHTML="+++"+sensorLocation;
-  });
-}
+//function val(characteristic){
+//return characteristic.readValue()
+  //.then(sensorLocationData => {
+    //let sensorLocation = sensorLocationData.getUint8(0);
+	//document.getElementById("data").innerHTML="+++"+sensorLocation;
+  //});
+//}
 
 function read(characteristic){
   return characteristic.startNotifications()
@@ -271,7 +271,7 @@ function onHeartRateChanged(event) {
 	
 }
 
-function w(characteristic){
+function put(characteristic){
 	if(characteristic == null){
 	document.getElementById("w").innerHTML="w";
 	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
