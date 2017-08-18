@@ -142,8 +142,8 @@ function putText(){
 
 function onHeartRateChanged(event) {		 	
     var value  = event.target.value;
-	document.getElementById("data").innerHTML="Received"+value ;
     var i, n = value.byteLength;
+	document.getElementById("data").innerHTML="Received"+value+"src"+i+"desr"+n;
     for (i = 0; i < n;){
         var k = value.getInt8(i++);
         var v = value.getInt8(i++);
