@@ -57,7 +57,7 @@ return characteristic.readValue()
 
 function read(characteristic){
   return characteristic.startNotifications()
-  .then(char => {
+  .then(characteristic => {
     characteristic.addEventListener('characteristicvaluechanged',onHeartRateChanged);
   });
 	
