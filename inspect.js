@@ -1,11 +1,14 @@
 
  let chosenHeartRateService = null;
  
+ uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
+ uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
+ uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
 
 function search(){
 	document.getElementById("demo").innerHTML="My First JavaScript";
 	let options = {
-		optionalServices:['00000000-0000-1000-8000-00805f9b34fb']
+		optionalServices:[uuid_tnnl]
 	};
 	let filters = [];
 	
@@ -32,13 +35,13 @@ function search(){
 	return	device.gatt.connect();
 	
 		       }).then(server => {		
-			 return server.getPrimaryService('00000000-0000-1000-8000-00805f9b34fb');
+			 return server.getPrimaryService(uuid_tnnl);
 			}).then(service => {
 			 chosenHeartRateService = service;
 			return Promise.all([
 			
-				 service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
-				  service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(read)
+				 service.getCharacteristic(uuid_writ).then(w),
+				  service.getCharacteristic(uuid_down).then(read)
 			]);
 	
              }).catch(error => {
@@ -70,10 +73,16 @@ function onHeartRateChanged(event) {
 }
 
 function w(characteristic){
-
+	if(characteristic == null){
+	document.getElementById("w").innerHTML="w";
+	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
+	 let resetEnergyExpended = new Uint8Array([34,8,35,7]);
+    characteristic.writeValue(resetEnergyExpended);
+	document.getElementById("w").innerHTML="wr";
+	}else{
     let resetEnergyExpended = new Uint8Array([34,8,35,7]);
     characteristic.writeValue(resetEnergyExpended);
-	document.getElementById("w").innerHTML="write";
+	document.getElementById("w").innerHTML="write";}
 }
 
 
