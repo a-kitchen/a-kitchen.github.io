@@ -39,7 +39,7 @@ function search(){
 			
 				  //service.getCharacteristic('00000001-0000-1000-8000-00805f9b34fb').then(w),
 				 // service.getCharacteristic('00000006-0000-1000-8000-00805f9b34fb').then(val),
-				  service.getCharacteristic('00000002-0000-1000-8000-00805f9b34fb').then(read)
+				  service.getCharacteristic('00000006-0000-1000-8000-00805f9b34fb').then(read)
 			]);
 	
              }).catch(error => {
@@ -56,10 +56,9 @@ return characteristic.readValue()
 }
 
 function read(characteristic){
-  return characteristic.startNotifications()
-  .then(characteristic => {
+   characteristic.startNotifications();
     characteristic.addEventListener('characteristicvaluechanged',onHeartRateChanged);
-  });
+
 	
 }
 
