@@ -63,12 +63,12 @@ function read(characteristic){
 	
 }
 
-var tmp_count = 0 ;
+//var tmp_count = 0 ;
 function onHeartRateChanged(event) {
-     //var value = event.target.value;
+    // var value = event.target.value;
   	//document.getElementById("data").innerHTML="Received"+sensorLocation;
-	tmp_count ++ ;
-		document.getElementById("data").innerHTML=tmp_count;
+	//tmp_count ++ ;
+		document.getElementById("data").innerHTML='aaaaaaaa';
 }
 
 function w(characteristic){
