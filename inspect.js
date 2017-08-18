@@ -65,7 +65,7 @@ function read(characteristic){
 var tmp_count = 0 ;
 function onHeartRateChanged(event) {
      var value = event.target.value;
-  	document.getElementById("data").innerHTML="Received"+sensorLocation;
+  	document.getElementById("data").innerHTML="Received"+value;
 	//tmp_count ++ ;
 	//document.getElementById("data").innerHTML='aaaaaaaa';
 }
