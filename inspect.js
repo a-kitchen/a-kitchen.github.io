@@ -104,13 +104,7 @@ function search(){
 }
 
 function put(characteristic){
-	//if(characteristic == null){
-	//document.getElementById("w").innerHTML="w";
-	//characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
-	// let resetEnergyExpended = new Uint8Array([34,8,35,7]);
-    //characteristic.writeValue(resetEnergyExpended);
-	//document.getElementById("w").innerHTML="wr";
-//	}else{
+
     let resetEnergyExpended = new Uint8Array([34,8,35,7]);
     characteristic.writeValue(resetEnergyExpended);
 	document.getElementById("w").innerHTML="write";
