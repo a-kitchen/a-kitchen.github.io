@@ -194,9 +194,9 @@ function set(value){
 	rese[2] = CMD_ID;
 	rese[3] = 0;
 	}else{
-    var j = parseInt(value);
-    var star = j/256;
-    var dest = j%256;
+    //var j = parseInt(value);
+    var star = value/256;
+    var dest = value%256;
     rese[1] = dest;
     rese[3] = star;
 	}
