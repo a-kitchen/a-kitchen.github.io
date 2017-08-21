@@ -197,8 +197,8 @@ function set(value){
     var j = parseInt(value);
     var star = j/256;
     var dest = j%256;
-    rese[1] = star;
-    rese[3] = dest;
+    rese[1] = dest;
+    rese[3] = star;
 	}
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
