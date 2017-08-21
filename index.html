@@ -214,13 +214,25 @@ function handleCharacteristicValueChanged(event) {
         switch(k){
         case 0x22:
             lpwr = v;
-			document.getElementById("tcpwr").value = hpwr + lpwr; 
+			
+			var myInput = document.getElementById('tcpwr')
+			if (myInput != document.activeElement) {
+                myInput.value = hpwr + lpwr;
+              }
+			
+			//document.getElementById("tcpwr").value = hpwr + lpwr; 
          //   cpwr.innerHTML = hpwr + lpwr;
             break;
         case 0x23:
             hpwr = v << 8;
+			
+			var myInput = document.getElementById('tcpwr')
+			if (myInput != document.activeElement) {
+                myInput.value = hpwr + lpwr;
+              }
+			
            // cpwr.innerHTML = hpwr + lpwr;
-		   	document.getElementById("tcpwr").value = hpwr + lpwr; 
+		  // 	document.getElementById("tcpwr").value = hpwr + lpwr; 
             break;
         case 0x24:
             lpph = v;
