@@ -186,19 +186,16 @@ function set(value){
 	rese[1] = value;
 	rese[2] = CMD_ID;
 	rese[3] = 0;
-	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
-    characteristic.writeValue(rese);
-     });
 	}else{
     var j = parseInt(value);
     var star = j%256;
     var dest = j/256;
     rese[1] = star;
     rese[3] = dest;
-    chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+	}
+	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
-	}
    console.log(rese);
   document.getElementById("w").innerHTML="wr"+star+"dest"+dest;
 }
@@ -224,7 +221,7 @@ function putText(){
      chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
-  
+    document.getElementById("w").innerHTML="wr"+star+"dest"+dest;
   
 
 }
@@ -260,12 +257,12 @@ function handleCharacteristicValueChanged(event) {
             break;
         case 0x24:
             lpph = v;
-			document.getElementById("tcpph").value = hpwr + lpwr; 
+			document.getElementById("tcpph").value = hpph + lpph;
             //cpph.innerHTML = hpph + lpph;
             break;
         case 0x25:
             hpph = v << 8;
-			document.getElementById("tcpph").value = hpwr + lpwr; 
+			document.getElementById("tcpph").value = hpph + lpph;
            // cpph.innerHTML = hpph + lpph;
             break;
         case 0x26:
