@@ -14,13 +14,13 @@ th{font-size:67%;font-weight:normal;text-align:left;vertical-align:bottom}
 <table>
 <tr><th>REMOTE NAME<td>&nbsp;<td><div id="rmot" onclick="go()">(Click to scan)
 <tr><th>&nbsp;
-<tr><th>CMD_POWER<td><td><div id="cpwr">&nbsp;</div>
-<tr><th>CMD_TEMPERATURE<td><td><div id="ctmp">&nbsp;</div>
-<tr><th>CMD_TIMER<td><td><div id="ctmr">&nbsp;</div>
-<tr><th>CMD_PERIPHERAL<td><td><div id="cpph">&nbsp;</div>
-<tr><th>CMD_LOADTEST<td><td><div id="ctst">&nbsp;</div>
-<tr><th>CMD_INDICATOR<td><td><div id="cind">&nbsp;</div>
-<tr><th>CMD_MODE<td><td><div id="cmod">&nbsp;</div>
+<tr><th>CMD_POWER<td><td><div id="cpwr">&nbsp;  <input id="tcpwr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_POWER"></div>      
+<tr><th>CMD_TEMPERATURE<td><td><div id="ctmp">&nbsp; <input id="ttmp" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TEMPERATURE"></div> 
+<tr><th>CMD_TIMER<td><td><div id="ctmr">&nbsp; <input id="ttmr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TIMER"> </div>          
+<tr><th>CMD_PERIPHERAL<td><td><div id="cpph">&nbsp; <input id="tcpph" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_PERIPHERAL"> </div> 
+<tr><th>CMD_LOADTEST<td><td><div id="ctst">&nbsp; <input id="tctst" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_LOADTEST"> </div>
+<tr><th>CMD_INDICATOR<td><td><div id="cind">&nbsp; <input id="tcind" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_INDICATOR"></div>   
+<tr><th>CMD_MODE<td><td><div id="cmod">&nbsp;  <input id="tcmod" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_MODE"></div>       
 <tr><th>&nbsp;
 <tr><th>RSP_ERROR<td><td><div id="rerr">&nbsp;</div>
 <tr><th>RSP_TEMPERATURE<td><td><div id="rtpr">&nbsp;</div>
@@ -133,6 +133,9 @@ function go(){
     });
 }
 
+function onFocusChange(view,value){
+            console.log("v"+view+"value"+value);
+}
 
 function putText(){
     let  set = document.querySelector('#set').value;
