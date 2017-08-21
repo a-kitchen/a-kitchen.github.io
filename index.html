@@ -139,7 +139,7 @@ function putText(){
     var j = parseInt(set);
     var star = j/256;
     var dest = j%256;
-    let rese= new Uint8Array([34,star,35,dest]);
+    let rese= new Uint8Array([34,dest,35,star]);
      chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
