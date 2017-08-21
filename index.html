@@ -102,6 +102,21 @@ ltpr = 0;
 lver = 0;
 lvol = 0;
 
+ CMD_POWER_LO = 0x22;
+ CMD_POWER_HI = 0x23;
+ CMD_TEMPERATURE_LO = 0x2a;
+ CMD_TEMPERATURE_HI = 0x2b;
+ CMD_TIMER_LO = 0x28;
+ CMD_TIMER_HI = 0x29;
+ CMD_PERIPHERAL_LO = 0x24;
+ CMD_PERIPHERAL_HI = 0x25;
+ CMD_LOADTEST = 0x26;
+ CMD_ID = 0x27;
+ CMD_INDICATOR = 0x2c;
+ CMD_MODE = 0x2d;
+ CMD_PLAY_LO = 0x2e;
+ CMD_PLAY_HI = 0x2f;
+
 let chosenHeartRateService = null;
 uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
@@ -132,9 +147,32 @@ function go(){
       console.log(error);
     });
 }
-
+ let rese= new Uint8Array([0,0,0,0]);
 function onFocusChange(view,value){
-            console.log("v"+view+"value"+value);
+ 
+	switch(view){
+	case 'tcpwr':
+	  console.log("tcpwr");
+	      break; 
+	case 'ttmp':
+	  console.log("ttmp");
+	     break;
+	case 'ttmr':
+	   console.log("ttmr");
+         break;
+    case 'tcpph':
+         break;
+    case 'tctst':
+         break;
+	case 'tcind':
+         break;
+    case 'tcmod':
+         break;	
+	default:
+	 console.log("view:"+view+"value:"+value);
+	 
+	}
+	
 }
 
 function putText(){
