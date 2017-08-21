@@ -147,14 +147,18 @@ function go(){
       console.log(error);
     });
 }
- let rese= new Uint8Array([0,0,0,0]);
+ let rese= new Uint8Array(3);
 function onFocusChange(view,value){
- 
 	switch(view){
 	case 'tcpwr':
+	rese[0] = CMD_POWER_LO;
+	rese[2] = CMD_POWER_HI;
+	set(value);
 	  console.log("tcpwr");
 	      break; 
 	case 'ttmp':
+    rese[0] = CMD_TEMPERATURE_LO;
+	rese[2] = CMD_TEMPERATURE_HI;	
 	  console.log("ttmp");
 	     break;
 	case 'ttmr':
@@ -175,17 +179,29 @@ function onFocusChange(view,value){
 	
 }
 
-function putText(){
-    let  set = document.querySelector('#set').value;
-    var j = parseInt(set);
-    var star = j/256;
-    var dest = j%256;
-    let rese= new Uint8Array([34,dest,35,star]);
+function set(value){
+ var j = parseInt(value);
+    var star = j%256;
+    var dest = j/256;
+  rese[1] = star;
+  rese[3] = dest;
      chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
+  document.getElementById("w").innerHTML="wr"+star+"dest"+dest;
+}
+
+function putText(){
+  //  let  set = document.querySelector('#set').value;
+   // var j = parseInt(set);
+    //var star = j/256;
+   // var dest = j%256;
+  //  let rese= new Uint8Array([34,dest,35,star]);
+    // chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+   // characteristic.writeValue(rese);
+    // });
   
-    document.getElementById("w").innerHTML="wr"+star+"dest"+dest;
+  
 
 }
 
