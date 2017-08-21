@@ -128,11 +128,10 @@ function putText(){
 	var j = parseInt(set);
 	var star = j/256;
 	var dest = j%256;
-	let rese= new Uint8Array([34,star,35,dest]);
+	let resetEnergyExpended = new Uint8Array([34,star,35,dest]);
+	document.getElementById("w").innerHTML="w";
 	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
-    Promise.all([
-	 characteristic.writeValue(rese);
-	]);
+   characteristic.writeValue(resetEnergyExpended);
 	document.getElementById("w").innerHTML="wr";
 	
 	
@@ -145,7 +144,7 @@ function onHeartRateChanged(event) {
     for (i = 0; i < n;){
         var k = value.getInt8(i++);
         var v = value.getInt8(i++);
-			document.getElementById("data").innerHTML="Received"+k+"src"+i+"desr"+v;
+		document.getElementById("data").innerHTML="Received"+k+"src"+i+"desr"+v;
         switch(k){
         case 0x22:
             lpwr = v;

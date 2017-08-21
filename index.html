@@ -1,26 +1,18 @@
+<!doctype html>
 <html>
 <head>
-<title>a-kitchen</title>
+<title>Inspector</title>
 </head>
 <style>
 *{font-family:verdana,arial,helvetica,sans-serif}
 th{font-size:67%;font-weight:normal;text-align:left;vertical-align:bottom}
 </style>
 <body>
-<h1>a-kitchen</h1>
-<br>
-<input id="services" type="text" size=17 placeholder="Device services"><br>
-<input id="name" type="text" size=17 placeholder="Device Name"><br>
-<input id="Prefix" type="text" size=17 placeholder="Device Name Prefix"><br>
-<button type="button" onclick="search()">sraech</button><br>
-<input id="set" type="text" size=17 placeholder="Set the content"><br>
-<button type="button" onclick="putText()">put</button>
-<br>
-<p id= "demo"> 123456789 </p>
-<p id = "w">w</p>
- <p id = "data">DATA</p>
-<br>
+    <input id="set" type="text" size=17 placeholder="Set the content">
+    <button type="button" onclick="putText()">put</button>
+    <p id = "w">w</p>
 <table>
+<tr><th>REMOTE NAME<td>&nbsp;<td><div id="rmot" onclick="go()">(Click to scan)
 <tr><th>&nbsp;
 <tr><th>CMD_POWER<td><td><div id="cpwr">&nbsp;</div>
 <tr><th>CMD_TEMPERATURE<td><td><div id="ctmp">&nbsp;</div>
@@ -48,14 +40,13 @@ th{font-size:67%;font-weight:normal;text-align:left;vertical-align:bottom}
 <tr><th>RSP_TOPOLOGY<td><td><div id="rtop">&nbsp;</div>
 <tr><th>RSP_VERSION<td><td><div id="rver">&nbsp;</div>
 </table>
-
 <p>Links
 <ul>
 <li><a href="https://googlechrome.github.io/samples/web-bluetooth/">Web Bluetooth Samples</a>
 <li><a href="https://github.com/WebBluetoothCG">Web Bluetooth Community Group</a>
 </ul>
+</body>
 <script>
-
 cind = document.getElementById('cind');
 cmod = document.getElementById('cmod');
 cpph = document.getElementById('cpph');
@@ -110,98 +101,59 @@ ltmr = 0;
 ltpr = 0;
 lver = 0;
 lvol = 0;
- 
- let chosenHeartRateService = null;
- 
- uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
- uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
- uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
 
-function search(){
-	document.getElementById("demo").innerHTML="My First JavaScript";
-	let options = {optionalServices:[uuid_tnnl]};
-	
-	let filters = [];
-	let  services = document.querySelector('#services').value;
-	let  filterName = document.querySelector('#name').value;
-	let  Prefix = document.querySelector('#Prefix').value;
-	if(services || filterName || Prefix){
-    if (filterName) {
-    filters.push({name:filterName});
-	}
-	 if(services){
-		 filters.push({services:[services]});
-	 }
-	 if(Prefix){
-		  filters.push({namePrefix: Prefix});
-	 }
-	 options.filters = filters;
-    }else{
-     options.acceptAllDevices = true;
-    }
-  
-	navigator.bluetooth.requestDevice(options).then(device => {
-		
-	return	device.gatt.connect();
-	
-		       }).then(server => {		
-			 return server.getPrimaryService(uuid_tnnl);
-			}).then(service => {
-			 chosenHeartRateService = service;
-			return Promise.all([
-				  service.getCharacteristic(uuid_writ).then(put),
-				  service.getCharacteristic(uuid_down).then(read)
-			]);
-	
-             }).catch(error => {
-			          document.getElementById("demo").innerHTML=error;
-			});
-}
+let chosenHeartRateService = null;
+uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
+uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
+uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
 
-function put(characteristic){
-	//if(characteristic == null){
-	//document.getElementById("w").innerHTML="w";
-	//characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
-	// let resetEnergyExpended = new Uint8Array([34,8,35,7]);
-    //characteristic.writeValue(resetEnergyExpended);
-	//document.getElementById("w").innerHTML="wr";
-//	}else{
-    let resetEnergyExpended = new Uint8Array([34,8,35,7]);
-    characteristic.writeValue(resetEnergyExpended);
-	document.getElementById("w").innerHTML="write";
-}
-
-
-function read(characteristic){
-  return characteristic.startNotifications()
+function go(){
+    navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
+    .then(device => {
+       rmot.innerHTML = device.name;
+        console.log('device.gatt.connect');
+        return device.gatt.connect();
+   }).then(server => {
+       console.log('server.getPrimaryService');
+       return server.getPrimaryService(uuid_tnnl);
+   }).then(service => {
+   chosenHeartRateService = service;
+    //  return Promise.all([
+         service.getCharacteristic(uuid_down).then(characteristic => {
+         characteristic.startNotifications()
   .then(characteristic => {
-    characteristic.addEventListener('characteristicvaluechanged',onHeartRateChanged);
+    characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
   });
-	
+         })
+
+     // ]);
+    
+    }).catch(error => {
+      console.log(error);
+    });
 }
+
 
 function putText(){
-	let  set = document.querySelector('#set').value;
-	var j = parseInt(set);
-	var star = j/256;
-	var dest = j%256;
-	let rese= new Uint8Array([34,star,35,dest]);
-	characteristic = chosenHeartRateService.getCharacteristic(uuid_writ);
-    Promise.all([
-	 characteristic.writeValue(rese);
-	]);
-	document.getElementById("w").innerHTML="wr";
-	
-	
+    let  set = document.querySelector('#set').value;
+    var j = parseInt(set);
+    var star = j/256;
+    var dest = j%256;
+    let rese= new Uint8Array([34,star,35,dest]);
+     chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+    characteristic.writeValue(rese);
+     });
+  
+    document.getElementById("w").innerHTML="wr";
+
 }
 
-function onHeartRateChanged(event) {		 	
-    var value  = event.target.value;
-    var i, n = value.byteLength;
-	document.getElementById("data").innerHTML="Received"+value+"src"+i+"desr"+n;
+function handleCharacteristicValueChanged(event) {
+    var s = event.target.value;
+    var i, n = s.byteLength;
     for (i = 0; i < n;){
-        var k = value.getInt8(i++);
-        var v = value.getInt8(i++);
+        var k = s.getInt8(i++);
+        var v = s.getInt8(i++);
         switch(k){
         case 0x22:
             lpwr = v;
@@ -343,10 +295,6 @@ function onHeartRateChanged(event) {
             console.log('k: ' + k + ', v: ' + v);
         }
     }
-	
 }
 </script>
-
-</body>
 </html>
-
