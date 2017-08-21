@@ -16,7 +16,7 @@ th{font-size:67%;font-weight:normal;text-align:left;vertical-align:bottom}
 <tr><th>&nbsp;
 <tr><th>CMD_POWER<td><td><div id="cpwr">&nbsp;  <input id="tcpwr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_POWER"></div>      
 <tr><th>CMD_TEMPERATURE<td><td><div id="ctmp">&nbsp; <input id="ttmp" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TEMPERATURE"></div> 
-<tr><th>CMD_TIMER<td><td><div id="ctmr">&nbsp; <input id="ttmr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TIMER"> </div>          
+<tr><th>CMD_TIMER<td><td><div id="ctmr">&nbsp; <input id="tctmr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TIMER"> </div>          
 <tr><th>CMD_PERIPHERAL<td><td><div id="cpph">&nbsp; <input id="tcpph" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_PERIPHERAL"> </div> 
 <tr><th>CMD_LOADTEST<td><td><div id="ctst">&nbsp; <input id="tctst" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_LOADTEST"> </div>
 <tr><th>CMD_INDICATOR<td><td><div id="cind">&nbsp; <input id="tcind" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_INDICATOR"></div>   
@@ -161,7 +161,7 @@ function onFocusChange(view,value){
 	rese[2] = CMD_TEMPERATURE_HI;	
 	  console.log("ttmp");
 	     break;
-	case 'ttmr':
+	case 'tctmr':
 	   console.log("ttmr");
          break;
     case 'tcpph':
@@ -214,46 +214,58 @@ function handleCharacteristicValueChanged(event) {
         switch(k){
         case 0x22:
             lpwr = v;
+			document.getElementById("tcpwr").value = hpwr + lpwr; 
          //   cpwr.innerHTML = hpwr + lpwr;
             break;
         case 0x23:
             hpwr = v << 8;
            // cpwr.innerHTML = hpwr + lpwr;
+		   	document.getElementById("tcpwr").value = hpwr + lpwr; 
             break;
         case 0x24:
             lpph = v;
+			document.getElementById("tcpph").value = hpwr + lpwr; 
             //cpph.innerHTML = hpph + lpph;
             break;
         case 0x25:
             hpph = v << 8;
+			document.getElementById("tcpph").value = hpwr + lpwr; 
            // cpph.innerHTML = hpph + lpph;
             break;
         case 0x26:
+		     document.getElementById("tctst").value = v; 
           //  ctst.innerHTML = v;
             break;
         case 0x27:
+		      document.getElementById("tctst").value = v; 
             //ctst.innerHTML = v;
             break;
         case 0x28:
             ltmr = v;
+			document.getElementById("tctmr").value = htmr + ltmr; 
           //  ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x29:
             htmr = v << 8;
+			document.getElementById("tctmr").value = htmr + ltmr; 
             //ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x2a:
             ltmp = v;
+			document.getElementById("tctmp").value = htmp + ltmp; 
            // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2b:
             htmp = v << 8;
+			document.getElementById("tctmp").value = htmp + ltmp;
            // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2c:
+		    document.getElementById("tcind").value = v;
            //cind.innerHTML = v;
             break;
         case 0x2d:
+		    document.getElementById("tcind").value = v;
             //cmod.innerHTML = v;
             break;
         case 0x62:
