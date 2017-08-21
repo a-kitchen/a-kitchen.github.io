@@ -154,25 +154,32 @@ function onFocusChange(view,value){
 	rese[0] = CMD_POWER_LO;
 	rese[2] = CMD_POWER_HI;
 	set(value);
-	  console.log("tcpwr");
 	      break; 
 	case 'ttmp':
     rese[0] = CMD_TEMPERATURE_LO;
 	rese[2] = CMD_TEMPERATURE_HI;	
-	  console.log("ttmp");
+	set(value);
 	     break;
 	case 'tctmr':
-	   console.log("ttmr");
+	resr[0] = CMD_TIMER_LO;
+	resr[2] = CMD_TIMER_HI;
+	set(value);
          break;
     case 'tcpph':
+	rese[0] = CMD_PERIPHERAL_LO;
+	rese[2] = CMD_PERIPHERAL_HI
          break;
     case 'tctst':
+	resr[0] = CMD_LOADTEST;
+	set(value);
          break;
 	case 'tcind':
 	rese[0] = CMD_INDICATOR;
 	set(value);
          break;
     case 'tcmod':
+	resw[0] = CMD_MODE;
+	set(value);
          break;	
 	default:
 	 console.log("view:"+view+"value:"+value);
@@ -188,8 +195,8 @@ function set(value){
 	rese[3] = 0;
 	}else{
     var j = parseInt(value);
-    var star = j%256;
-    var dest = j/256;
+    var star = j/256;
+    var dest = j%256;
     rese[1] = star;
     rese[3] = dest;
 	}
@@ -257,48 +264,99 @@ function handleCharacteristicValueChanged(event) {
             break;
         case 0x24:
             lpph = v;
-			document.getElementById("tcpph").value = hpph + lpph;
+			
+			var myInput = document.getElementById('tcpph')
+			if (myInput != document.activeElement) {
+                myInput.value = hpph + lpph;
+              }
+			
+			//document.getElementById("tcpph").value = hpph + lpph;
             //cpph.innerHTML = hpph + lpph;
             break;
         case 0x25:
             hpph = v << 8;
-			document.getElementById("tcpph").value = hpph + lpph;
+			var myInput = document.getElementById('tcpph')
+			if (myInput != document.activeElement) {
+                myInput.value = hpph + lpph;
+              }
+			//document.getElementById("tcpph").value = hpph + lpph;
            // cpph.innerHTML = hpph + lpph;
             break;
         case 0x26:
-		     document.getElementById("tctst").value = v; 
+		
+		var myInput = document.getElementById('tctst')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+		
+		    // document.getElementById("tctst").value = v; 
           //  ctst.innerHTML = v;
             break;
         case 0x27:
-		      document.getElementById("tctst").value = v; 
+		var myInput = document.getElementById('tctst')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+		
+		     // document.getElementById("tctst").value = v; 
             //ctst.innerHTML = v;
             break;
         case 0x28:
             ltmr = v;
-			document.getElementById("tctmr").value = htmr + ltmr; 
+			
+			var myInput = document.getElementById('tctmr')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+			
+			//document.getElementById("tctmr").value = htmr + ltmr; 
           //  ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x29:
             htmr = v << 8;
-			document.getElementById("tctmr").value = htmr + ltmr; 
+			
+			var myInput = document.getElementById('tctmr')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+			//document.getElementById("tctmr").value = htmr + ltmr; 
             //ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x2a:
             ltmp = v;
-			document.getElementById("tctmp").value = htmp + ltmp; 
+			
+			var myInput = document.getElementById('tctmp')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+			//document.getElementById("tctmp").value = htmp + ltmp; 
            // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2b:
             htmp = v << 8;
-			document.getElementById("tctmp").value = htmp + ltmp;
+			
+			var myInput = document.getElementById('tctmp')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+			//document.getElementById("tctmp").value = htmp + ltmp;
            // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2c:
-		    document.getElementById("tcind").value = v;
+		    var myInput = document.getElementById('tcind')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+		    //document.getElementById("tcind").value = v;
            //cind.innerHTML = v;
             break;
         case 0x2d:
-		    document.getElementById("tcind").value = v;
+		    var myInput = document.getElementById('tcind')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+		
+		   // document.getElementById("tcind").value = v;
             //cmod.innerHTML = v;
             break;
         case 0x62:
