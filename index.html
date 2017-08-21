@@ -215,7 +215,7 @@ function isByte(key){
 		case CMD_MODE:
 		  return true;
 		default:
-           return false;	
+           return false;
       }		   
 }
 
@@ -294,10 +294,6 @@ function handleCharacteristicValueChanged(event) {
             break;
         case 0x27:
 		var myInput = document.getElementById('tctst')
-			if (myInput != document.activeElement) {
-                myInput.value = v;
-              }
-		
 		     // document.getElementById("tctst").value = v; 
             //ctst.innerHTML = v;
             break;
