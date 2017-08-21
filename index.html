@@ -216,14 +216,14 @@ function isByte(key){
 }
 
 function putText(){
-  //  let  set = document.querySelector('#set').value;
-   // var j = parseInt(set);
-    //var star = j/256;
-   // var dest = j%256;
-  //  let rese= new Uint8Array([34,dest,35,star]);
-    // chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
-   // characteristic.writeValue(rese);
-    // });
+    let  set = document.querySelector('#set').value;
+    var j = parseInt(set);
+    var star = j/256;
+    var dest = j%256;
+    let rese= new Uint8Array([34,dest,35,star]);
+     chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+    characteristic.writeValue(rese);
+     });
   
   
 
