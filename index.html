@@ -214,47 +214,47 @@ function handleCharacteristicValueChanged(event) {
         switch(k){
         case 0x22:
             lpwr = v;
-            cpwr.innerHTML = hpwr + lpwr;
+         //   cpwr.innerHTML = hpwr + lpwr;
             break;
         case 0x23:
             hpwr = v << 8;
-            cpwr.innerHTML = hpwr + lpwr;
+           // cpwr.innerHTML = hpwr + lpwr;
             break;
         case 0x24:
             lpph = v;
-            cpph.innerHTML = hpph + lpph;
+            //cpph.innerHTML = hpph + lpph;
             break;
         case 0x25:
             hpph = v << 8;
-            cpph.innerHTML = hpph + lpph;
+           // cpph.innerHTML = hpph + lpph;
             break;
         case 0x26:
-            ctst.innerHTML = v;
+          //  ctst.innerHTML = v;
             break;
         case 0x27:
             //ctst.innerHTML = v;
             break;
         case 0x28:
             ltmr = v;
-            ctmr.innerHTML = htmr + ltmr;
+          //  ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x29:
             htmr = v << 8;
-            ctmr.innerHTML = htmr + ltmr;
+            //ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x2a:
             ltmp = v;
-            ctmp.innerHTML = htmp + ltmp;
+           // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2b:
             htmp = v << 8;
-            ctmp.innerHTML = htmp + ltmp;
+           // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2c:
-            cind.innerHTML = v;
+           //cind.innerHTML = v;
             break;
         case 0x2d:
-            cmod.innerHTML = v;
+            //cmod.innerHTML = v;
             break;
         case 0x62:
             lerr = v;
