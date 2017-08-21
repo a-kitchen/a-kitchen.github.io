@@ -140,9 +140,7 @@ function go(){
     characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
   });
          })
-
      // ]);
-    
     }).catch(error => {
       console.log(error);
     });
@@ -194,7 +192,6 @@ function set(value){
 	rese[2] = CMD_ID;
 	rese[3] = 0;
 	}else{
-    //var j = parseInt(value);
     var star = value/256;
     var dest = value%256;
     rese[1] = dest;
@@ -220,20 +217,6 @@ function isByte(key){
       }		   
 }
 
-function putText(){
-    let  set = document.querySelector('#set').value;
-    var j = parseInt(set);
-    var star = j/256;
-    var dest = j%256;
-    let rese= new Uint8Array([34,dest,35,star]);
-     chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
-    characteristic.writeValue(rese);
-     });
-   document.getElementById("w").innerHTML=rese;
-  
-
-}
-
 function handleCharacteristicValueChanged(event) {
     var s = event.target.value;
     var i, n = s.byteLength;
@@ -243,13 +226,11 @@ function handleCharacteristicValueChanged(event) {
         switch(k){
         case 0x22:
             lpwr = v;
-			
+	
 			var myInput = document.getElementById('tcpwr')
 			if (myInput != document.activeElement) {
                 myInput.value = hpwr + lpwr;
               }
-			
-			//document.getElementById("tcpwr").value = hpwr + lpwr; 
          //   cpwr.innerHTML = hpwr + lpwr;
             break;
         case 0x23:
@@ -261,7 +242,6 @@ function handleCharacteristicValueChanged(event) {
               }
 			
            // cpwr.innerHTML = hpwr + lpwr;
-		  // 	document.getElementById("tcpwr").value = hpwr + lpwr; 
             break;
         case 0x24:
             lpph = v;
@@ -270,8 +250,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = hpph + lpph;
               }
-			
-			//document.getElementById("tcpph").value = hpph + lpph;
             //cpph.innerHTML = hpph + lpph;
             break;
         case 0x25:
@@ -280,7 +258,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = hpph + lpph;
               }
-			//document.getElementById("tcpph").value = hpph + lpph;
            // cpph.innerHTML = hpph + lpph;
             break;
         case 0x26:
@@ -289,13 +266,10 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = v;
               }
-		
-		    // document.getElementById("tctst").value = v; 
           //  ctst.innerHTML = v;
             break;
         case 0x27:
 		var myInput = document.getElementById('tctst')
-		     // document.getElementById("tctst").value = v; 
             //ctst.innerHTML = v;
             break;
         case 0x28:
@@ -305,8 +279,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = htmr + ltmr;
               }
-			
-			//document.getElementById("tctmr").value = htmr + ltmr; 
           //  ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x29:
@@ -316,7 +288,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = htmr + ltmr;
               }
-			//document.getElementById("tctmr").value = htmr + ltmr; 
             //ctmr.innerHTML = htmr + ltmr;
             break;
         case 0x2a:
@@ -326,7 +297,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = htmr + ltmr;
               }
-			//document.getElementById("tctmp").value = htmp + ltmp; 
            // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2b:
@@ -336,7 +306,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = htmr + ltmr;
               }
-			//document.getElementById("tctmp").value = htmp + ltmp;
            // ctmp.innerHTML = htmp + ltmp;
             break;
         case 0x2c:
@@ -344,7 +313,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = v;
               }
-		    //document.getElementById("tcind").value = v;
            //cind.innerHTML = v;
             break;
         case 0x2d:
@@ -352,8 +320,6 @@ function handleCharacteristicValueChanged(event) {
 			if (myInput != document.activeElement) {
                 myInput.value = v;
               }
-		
-		   // document.getElementById("tcind").value = v;
             //cmod.innerHTML = v;
             break;
         case 0x62:
