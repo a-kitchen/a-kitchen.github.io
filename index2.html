@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+<head>
+<title>Inspector</title>
+</head>
+<style>
+*{font-family:verdana,arial,helvetica,sans-serif}
+th{font-size:67%;font-weight:normal;text-align:left;vertical-align:bottom}
+</style>
+<body>
+    <p id = "w">w</p>
+<table>
+<tr><th>REMOTE NAME<td>&nbsp;<td><div id="rmot" onclick="go()">(Click to scan)
+<tr><th>&nbsp;
+<tr><th>CMD_POWER<td><td><div id="cpwr">&nbsp;  <input id="tcpwr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_POWER"></div>      
+<tr><th>CMD_TEMPERATURE<td><td><div id="ctmp">&nbsp; <input id="ttmp" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TEMPERATURE"></div> 
+<tr><th>CMD_TIMER<td><td><div id="ctmr">&nbsp; <input id="tctmr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TIMER"> </div>          
+<tr><th>CMD_PERIPHERAL<td><td><div id="cpph">&nbsp; <input id="tcpph" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_PERIPHERAL"> </div> 
+<tr><th>CMD_LOADTEST<td><td><div id="ctst">&nbsp; <input id="tctst" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_LOADTEST"> </div>
+<tr><th>CMD_INDICATOR<td><td><div id="cind">&nbsp; <input id="tcind" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_INDICATOR"></div>   
+<tr><th>CMD_MODE<td><td><div id="cmod">&nbsp;  <input id="tcmod" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_MODE"></div>       
+<tr><th>&nbsp;
+<tr><th>RSP_ERROR<td><td><div id="rerr">&nbsp;</div>
+<tr><th>RSP_TEMPERATURE<td><td><div id="rtpr">&nbsp;</div>
+<tr><th>RSP_BUTTON<td><td><div id="rbtn">&nbsp;</div>
+<tr><th>RSP_KNOB<td><td><div id="rknb">&nbsp;</div>
+<tr><th>&nbsp;
+<tr><th>RSP_CURRENT<td><td><div id="rcur">&nbsp;</div>
+<tr><th>RSP_VOLTAGE<td><td><div id="rvol">&nbsp;</div>
+<tr><th>RSP_PULSE<td><td><div id="rpls">&nbsp;</div>
+<tr><th>RSP_LOADTEST<td><td><div id="rtst">&nbsp;</div>
+<tr><th>&nbsp;
+<tr><th>RSP_TEMPCOIL<td><td><div id="rcol">&nbsp;</div>
+<tr><th>RSP_TEMPENV<td><td><div id="renv">&nbsp;</div>
+<tr><th>RSP_TEMPSINK<td><td><div id="rsnk">&nbsp;</div>
+<tr><th>&nbsp;
+<tr><th>RSP_CLOCK<td><td><div id="rclk">&nbsp;</div>
+<tr><th>RSP_TOPOLOGY<td><td><div id="rtop">&nbsp;</div>
+<tr><th>RSP_VERSION<td><td><div id="rver">&nbsp;</div>
+</table>
+<p>Links
+<ul>
+<li><a href="https://googlechrome.github.io/samples/web-bluetooth/">Web Bluetooth Samples</a>
+<li><a href="https://github.com/WebBluetoothCG">Web Bluetooth Community Group</a>
+</ul>
+</body>
+<script>
+cind = document.getElementById('cind');
+cmod = document.getElementById('cmod');
+cpph = document.getElementById('cpph');
+cpwr = document.getElementById('cpwr');
+ctmp = document.getElementById('ctmp');
+ctmr = document.getElementById('ctmr');
+ctst = document.getElementById('ctst');
+rbtn = document.getElementById('rbtn');
+rclk = document.getElementById('rclk');
+rcol = document.getElementById('rcol');
+rcur = document.getElementById('rcur');
+renv = document.getElementById('renv');
+rerr = document.getElementById('rerr');
+rknb = document.getElementById('rknb');
+rmot = document.getElementById('rmot');
+rpls = document.getElementById('rpls');
+rsnk = document.getElementById('rsnk');
+rtpr = document.getElementById('rtpr');
+rtop = document.getElementById('rtop');
+rtst = document.getElementById('rtst');
+rver = document.getElementById('rver');
+rvol = document.getElementById('rvol');
+
+hclk = 0;
+hcol = 0;
+hcur = 0;
+henv = 0;
+herr = 0;
+hknb = 0;
+hpph = 0;
+hpwr = 0;
+hpls = 0;
+hsnk = 0;
+htmp = 0;
+htmr = 0;
+htpr = 0;
+hver = 0;
+hvol = 0;
+
+lclk = 0;
+lcol = 0;
+lcur = 0;
+lenv = 0;
+lerr = 0;
+lknb = 0;
+lpph = 0;
+lpwr = 0;
+lpls = 0;
+lsnk = 0;
+ltmp = 0;
+ltmr = 0;
+ltpr = 0;
+lver = 0;
+lvol = 0;
+
+ CMD_POWER_LO = 0x22;
+ CMD_POWER_HI = 0x23;
+ CMD_TEMPERATURE_LO = 0x2a;
+ CMD_TEMPERATURE_HI = 0x2b;
+ CMD_TIMER_LO = 0x28;
+ CMD_TIMER_HI = 0x29;
+ CMD_PERIPHERAL_LO = 0x24;
+ CMD_PERIPHERAL_HI = 0x25;
+ CMD_LOADTEST = 0x26;
+ CMD_ID = 0x27;
+ CMD_INDICATOR = 0x2c;
+ CMD_MODE = 0x2d;
+ CMD_PLAY_LO = 0x2e;
+ CMD_PLAY_HI = 0x2f;
+
+let chosenHeartRateService = null;
+uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
+uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
+uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
+
+function go(){
+    navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
+    .then(device => {
+       rmot.innerHTML = device.name;
+        console.log('device.gatt.connect');
+        return device.gatt.connect();
+   }).then(server => {
+       console.log('server.getPrimaryService');
+       return server.getPrimaryService(uuid_tnnl);
+   }).then(service => {
+   chosenHeartRateService = service;
+    //  return Promise.all([
+         service.getCharacteristic(uuid_down).then(characteristic => {
+         characteristic.startNotifications()
+  .then(characteristic => {
+    characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
+  });
+         })
+     // ]);
+    }).catch(error => {
+      console.log(error);
+    });
+}
+ let rese= new Uint8Array(4);
+function onFocusChange(view,value){
+	switch(view){
+	case 'tcpwr':
+	rese[0] = CMD_POWER_LO;
+	rese[2] = CMD_POWER_HI;
+	set(value);
+	      break; 
+	case 'ttmp':
+    rese[0] = CMD_TEMPERATURE_LO;
+	rese[2] = CMD_TEMPERATURE_HI;	
+	set(value);
+	     break;
+	case 'tctmr':
+	resr[0] = CMD_TIMER_LO;
+	resr[2] = CMD_TIMER_HI;
+	set(value);
+         break;
+    case 'tcpph':
+	rese[0] = CMD_PERIPHERAL_LO;
+	rese[2] = CMD_PERIPHERAL_HI
+         break;
+    case 'tctst':
+	resr[0] = CMD_LOADTEST;
+	set(value);
+         break;
+	case 'tcind':
+	rese[0] = CMD_INDICATOR;
+	set(value);
+         break;
+    case 'tcmod':
+	resw[0] = CMD_MODE;
+	set(value);
+         break;	
+	default:
+	 console.log("view:"+view+"value:"+value);
+	 
+	}
+	
+}
+
+function set(value){
+    if(isByte(rese[0])){
+	rese[1] = value;
+	rese[2] = CMD_ID;
+	rese[3] = 0;
+	}else{
+    var star = value/256;
+    var dest = value%256;
+    rese[1] = dest;
+    rese[3] = star;
+	}
+	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+    characteristic.writeValue(rese);
+     });
+   console.log(rese);
+  document.getElementById("w").innerHTML=rese;
+
+}
+
+function isByte(key){
+   switch(key){
+        case CMD_ID:
+		case CMD_INDICATOR:
+		case CMD_LOADTEST:
+		case CMD_MODE:
+		  return true;
+		default:
+           return false;
+      }		   
+}
+
+function handleCharacteristicValueChanged(event) {
+    var s = event.target.value;
+    var i, n = s.byteLength;
+    for (i = 0; i < n;){
+        var k = s.getInt8(i++);
+        var v = s.getInt8(i++);
+        switch(k){
+        case 0x22:
+            lpwr = v;
+	
+			var myInput = document.getElementById('tcpwr')
+			if (myInput != document.activeElement) {
+                myInput.value = hpwr + lpwr;
+              }
+         //   cpwr.innerHTML = hpwr + lpwr;
+            break;
+        case 0x23:
+            hpwr = v << 8;
+			
+			var myInput = document.getElementById('tcpwr')
+			if (myInput != document.activeElement) {
+                myInput.value = hpwr + lpwr;
+              }
+			
+           // cpwr.innerHTML = hpwr + lpwr;
+            break;
+        case 0x24:
+            lpph = v;
+			
+			var myInput = document.getElementById('tcpph')
+			if (myInput != document.activeElement) {
+                myInput.value = hpph + lpph;
+              }
+            //cpph.innerHTML = hpph + lpph;
+            break;
+        case 0x25:
+            hpph = v << 8;
+			var myInput = document.getElementById('tcpph')
+			if (myInput != document.activeElement) {
+                myInput.value = hpph + lpph;
+              }
+           // cpph.innerHTML = hpph + lpph;
+            break;
+        case 0x26:
+		
+		var myInput = document.getElementById('tctst')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+          //  ctst.innerHTML = v;
+            break;
+        case 0x27:
+		var myInput = document.getElementById('tctst')
+            //ctst.innerHTML = v;
+            break;
+        case 0x28:
+            ltmr = v;
+			
+			var myInput = document.getElementById('tctmr')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+          //  ctmr.innerHTML = htmr + ltmr;
+            break;
+        case 0x29:
+            htmr = v << 8;
+			
+			var myInput = document.getElementById('tctmr')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+            //ctmr.innerHTML = htmr + ltmr;
+            break;
+        case 0x2a:
+            ltmp = v;
+			
+			var myInput = document.getElementById('tctmp')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+           // ctmp.innerHTML = htmp + ltmp;
+            break;
+        case 0x2b:
+            htmp = v << 8;
+			
+			var myInput = document.getElementById('tctmp')
+			if (myInput != document.activeElement) {
+                myInput.value = htmr + ltmr;
+              }
+           // ctmp.innerHTML = htmp + ltmp;
+            break;
+        case 0x2c:
+		    var myInput = document.getElementById('tcind')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+           //cind.innerHTML = v;
+            break;
+        case 0x2d:
+		    var myInput = document.getElementById('tcind')
+			if (myInput != document.activeElement) {
+                myInput.value = v;
+              }
+            //cmod.innerHTML = v;
+            break;
+        case 0x62:
+            lerr = v;
+            rerr.innerHTML = herr + lerr;
+            break;
+        case 0x63:
+            herr = v << 8;
+            rerr.innerHTML = herr + lerr;
+            break;
+        case 0x64:
+            lvol = v;
+            rvol.innerHTML = hvol + lvol;
+            break;
+        case 0x65:
+            hvol = v << 8;
+            rvol.innerHTML = hvol + lvol;
+            break;
+        case 0x66:
+            lcur = v;
+            rcur.innerHTML = hcur + lcur;
+            break;
+        case 0x67:
+            hcur = v << 8;
+            rcur.innerHTML = hcur + lcur;
+            break;
+        case 0x68:
+            ltpr = v;
+            rtpr.innerHTML = htpr + ltpr;
+            break;
+        case 0x69:
+            htpr = v << 8;
+            rtpr.innerHTML = htpr + ltpr;
+            break;
+        case 0x6a:
+            rtst.innerHTML = v;
+            break;
+        case 0x6c:
+            lsnk = v;
+            rsnk.innerHTML = hsnk + lsnk;
+            break;
+        case 0x6d:
+            hsnk = v << 8;
+            rsnk.innerHTML = hsnk + lsnk;
+            break;
+        case 0x6e:
+            lclk = v;
+            rclk.innerHTML = hclk + lclk;
+            break;
+        case 0x6f:
+            hclk = v << 8;
+            rclk.innerHTML = hclk + lclk;
+            break;
+        case 0x70:
+            lpls = v;
+            rpls.innerHTML = hpls + lpls;
+            break;
+        case 0x71:
+            hpls = v << 8;
+            rpls.innerHTML = hpls + lpls;
+            break;
+        case 0x72:
+            lcol = v;
+            rcol.innerHTML = hcol + lcol;
+            break;
+        case 0x73:
+            hcol = v << 8;
+            rcol.innerHTML = hcol + lcol;
+            break;
+        case 0x74:
+            rtop.innerHTML = v;
+            break;
+        case 0x76:
+            lver = v;
+            rver.innerHTML = hver + lver;
+            break;
+        case 0x77:
+            hver = v << 8;
+            rver.innerHTML = hver + lver;
+            break;
+        case 0x78:
+            lenv = v;
+            renv.innerHTML = henv + lenv;
+            break;
+        case 0x79:
+            henv = v << 8;
+            renv.innerHTML = henv + lenv;
+            break;
+        case 0x7e:
+            rbtn.innerHTML = v;
+            break;
+        case 0x7f:
+            rknb.innerHTML = v;
+            break;
+        default:
+            console.log('k: ' + k + ', v: ' + v);
+        }
+    }
+}
+</script>
+</html>

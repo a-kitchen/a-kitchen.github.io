@@ -1,421 +1,239 @@
-<!doctype html>
 <html>
+
 <head>
-<title>Inspector</title>
-</head>
-<style>
-*{font-family:verdana,arial,helvetica,sans-serif}
-th{font-size:67%;font-weight:normal;text-align:left;vertical-align:bottom}
-</style>
-<body>
-    <p id = "w">w</p>
-<table>
-<tr><th>REMOTE NAME<td>&nbsp;<td><div id="rmot" onclick="go()">(Click to scan)
-<tr><th>&nbsp;
-<tr><th>CMD_POWER<td><td><div id="cpwr">&nbsp;  <input id="tcpwr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_POWER"></div>      
-<tr><th>CMD_TEMPERATURE<td><td><div id="ctmp">&nbsp; <input id="ttmp" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TEMPERATURE"></div> 
-<tr><th>CMD_TIMER<td><td><div id="ctmr">&nbsp; <input id="tctmr" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_TIMER"> </div>          
-<tr><th>CMD_PERIPHERAL<td><td><div id="cpph">&nbsp; <input id="tcpph" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_PERIPHERAL"> </div> 
-<tr><th>CMD_LOADTEST<td><td><div id="ctst">&nbsp; <input id="tctst" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_LOADTEST"> </div>
-<tr><th>CMD_INDICATOR<td><td><div id="cind">&nbsp; <input id="tcind" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_INDICATOR"></div>   
-<tr><th>CMD_MODE<td><td><div id="cmod">&nbsp;  <input id="tcmod" onchange="onFocusChange(this.id,this.value)" type="text" size=17 placeholder="CMD_MODE"></div>       
-<tr><th>&nbsp;
-<tr><th>RSP_ERROR<td><td><div id="rerr">&nbsp;</div>
-<tr><th>RSP_TEMPERATURE<td><td><div id="rtpr">&nbsp;</div>
-<tr><th>RSP_BUTTON<td><td><div id="rbtn">&nbsp;</div>
-<tr><th>RSP_KNOB<td><td><div id="rknb">&nbsp;</div>
-<tr><th>&nbsp;
-<tr><th>RSP_CURRENT<td><td><div id="rcur">&nbsp;</div>
-<tr><th>RSP_VOLTAGE<td><td><div id="rvol">&nbsp;</div>
-<tr><th>RSP_PULSE<td><td><div id="rpls">&nbsp;</div>
-<tr><th>RSP_LOADTEST<td><td><div id="rtst">&nbsp;</div>
-<tr><th>&nbsp;
-<tr><th>RSP_TEMPCOIL<td><td><div id="rcol">&nbsp;</div>
-<tr><th>RSP_TEMPENV<td><td><div id="renv">&nbsp;</div>
-<tr><th>RSP_TEMPSINK<td><td><div id="rsnk">&nbsp;</div>
-<tr><th>&nbsp;
-<tr><th>RSP_CLOCK<td><td><div id="rclk">&nbsp;</div>
-<tr><th>RSP_TOPOLOGY<td><td><div id="rtop">&nbsp;</div>
-<tr><th>RSP_VERSION<td><td><div id="rver">&nbsp;</div>
-</table>
-<p>Links
-<ul>
-<li><a href="https://googlechrome.github.io/samples/web-bluetooth/">Web Bluetooth Samples</a>
-<li><a href="https://github.com/WebBluetoothCG">Web Bluetooth Community Group</a>
-</ul>
-</body>
-<script>
-cind = document.getElementById('cind');
-cmod = document.getElementById('cmod');
-cpph = document.getElementById('cpph');
-cpwr = document.getElementById('cpwr');
-ctmp = document.getElementById('ctmp');
-ctmr = document.getElementById('ctmr');
-ctst = document.getElementById('ctst');
-rbtn = document.getElementById('rbtn');
-rclk = document.getElementById('rclk');
-rcol = document.getElementById('rcol');
-rcur = document.getElementById('rcur');
-renv = document.getElementById('renv');
-rerr = document.getElementById('rerr');
-rknb = document.getElementById('rknb');
-rmot = document.getElementById('rmot');
-rpls = document.getElementById('rpls');
-rsnk = document.getElementById('rsnk');
-rtpr = document.getElementById('rtpr');
-rtop = document.getElementById('rtop');
-rtst = document.getElementById('rtst');
-rver = document.getElementById('rver');
-rvol = document.getElementById('rvol');
-
-hclk = 0;
-hcol = 0;
-hcur = 0;
-henv = 0;
-herr = 0;
-hknb = 0;
-hpph = 0;
-hpwr = 0;
-hpls = 0;
-hsnk = 0;
-htmp = 0;
-htmr = 0;
-htpr = 0;
-hver = 0;
-hvol = 0;
-
-lclk = 0;
-lcol = 0;
-lcur = 0;
-lenv = 0;
-lerr = 0;
-lknb = 0;
-lpph = 0;
-lpwr = 0;
-lpls = 0;
-lsnk = 0;
-ltmp = 0;
-ltmr = 0;
-ltpr = 0;
-lver = 0;
-lvol = 0;
-
- CMD_POWER_LO = 0x22;
- CMD_POWER_HI = 0x23;
- CMD_TEMPERATURE_LO = 0x2a;
- CMD_TEMPERATURE_HI = 0x2b;
- CMD_TIMER_LO = 0x28;
- CMD_TIMER_HI = 0x29;
- CMD_PERIPHERAL_LO = 0x24;
- CMD_PERIPHERAL_HI = 0x25;
- CMD_LOADTEST = 0x26;
- CMD_ID = 0x27;
- CMD_INDICATOR = 0x2c;
- CMD_MODE = 0x2d;
- CMD_PLAY_LO = 0x2e;
- CMD_PLAY_HI = 0x2f;
-
-let chosenHeartRateService = null;
-uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
-uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
-uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
-
-function go(){
-    navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
-    .then(device => {
-       rmot.innerHTML = device.name;
-        console.log('device.gatt.connect');
-        return device.gatt.connect();
-   }).then(server => {
-       console.log('server.getPrimaryService');
-       return server.getPrimaryService(uuid_tnnl);
-   }).then(service => {
-   chosenHeartRateService = service;
-    //  return Promise.all([
-         service.getCharacteristic(uuid_down).then(characteristic => {
-         characteristic.startNotifications()
-  .then(characteristic => {
-    characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
-  });
-         })
-     // ]);
-    }).catch(error => {
-      console.log(error);
-    });
-}
- let rese= new Uint8Array(4);
-function onFocusChange(view,value){
-	switch(view){
-	case 'tcpwr':
-	rese[0] = CMD_POWER_LO;
-	rese[2] = CMD_POWER_HI;
-	set(value);
-	      break; 
-	case 'ttmp':
-    rese[0] = CMD_TEMPERATURE_LO;
-	rese[2] = CMD_TEMPERATURE_HI;	
-	set(value);
-	     break;
-	case 'tctmr':
-	resr[0] = CMD_TIMER_LO;
-	resr[2] = CMD_TIMER_HI;
-	set(value);
-         break;
-    case 'tcpph':
-	rese[0] = CMD_PERIPHERAL_LO;
-	rese[2] = CMD_PERIPHERAL_HI
-         break;
-    case 'tctst':
-	resr[0] = CMD_LOADTEST;
-	set(value);
-         break;
-	case 'tcind':
-	rese[0] = CMD_INDICATOR;
-	set(value);
-         break;
-    case 'tcmod':
-	resw[0] = CMD_MODE;
-	set(value);
-         break;	
-	default:
-	 console.log("view:"+view+"value:"+value);
-	 
-	}
+	<title>a.kitchen</title>
 	
+<style type="text/css">
+<!--
+#apDiv1 {
+	position:absolute;
+	width:100%;
+	height:65px;
+	z-index:1;
+}
+#apDiv2 {
+	position:absolute;
+	width:200px;
+	height:65px;
+	left: 20%;
+	top: 0px;
+}
+#apDiv3 {
+	position:absolute;
+	width:480px;
+	height:64px;
+	z-index:2;
+	left: 60%;
+	top: 1px;
+}
+.style3 {
+	color: #FFFFFF
 }
 
-function set(value){
-    if(isByte(rese[0])){
-	rese[1] = value;
-	rese[2] = CMD_ID;
-	rese[3] = 0;
-	}else{
-    var star = value/256;
-    var dest = value%256;
-    rese[1] = dest;
-    rese[3] = star;
-	}
-	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
-    characteristic.writeValue(rese);
-     });
-   console.log(rese);
-  document.getElementById("w").innerHTML=rese;
+#apDiv5 {
+	position:absolute;
+	width:100%;
+	height:100px;
+	z-index:3;
+	top: 1038px;
+	left: 1px;
+}
+#apDiv6 {
+	position:absolute;
+	width:100%;
+	height:370px;
+	z-index:1;
+	top: 65px;
+}
+#apDiv7 {
+	margin:0 auto;
 
+	width:670px;
+	height:370px;
+	z-index:1;
+}
+#apDiv8 {
+	margin:0 auto;
+	position:absolute;
+	width:100%;
+	height:600px;
+	z-index:4;
+	top: 435px;
 }
 
-function isByte(key){
-   switch(key){
-        case CMD_ID:
-		case CMD_INDICATOR:
-		case CMD_LOADTEST:
-		case CMD_MODE:
-		  return true;
-		default:
-           return false;
-      }		   
+* {margin:0;padding:0;}
+ul {list-style:none;}
+
+.wrap {width:670px;height:350px;position:relative;overflow:hidden;float:left;margin:10px;}
+.slidebox {width:670px;position:absolute;top:0;left:0;height:350px;}
+.slidebox li {float:left;width:670px;height:350px;left:0;top:0;}
+.slidebox li img {display:block;width:670px;height:350px;}
+.dot {position:absolute;width:100%;height:30px;background:rgba(0,0,0,0.3);text-align:right;bottom:0;left:0;}
+.dot p {margin-right:10px;}
+.dot b {width:17px;height:17px;border-radius:20px;color:#333;display:inline-block;border:1px solid #fff;background:#fff;text-align:center;line-height:17px;margin:0 3px;margin-top:6px;cursor:pointer;font-weight:normal;}
+.dot .cur {background:#F63;color:#fff;border:1px solid #f63;}
+.style5 {
+	color: #FFD700;
+	font-weight: bold;
+}
+#apDiv4 {
+	position:absolute;
+	width:950px;
+	height:600px;
+	z-index:1;
+	left: 20%;
+}
+#apDiv9 {
+	position:absolute;
+	width:200px;
+	height:60px;
+	z-index:1;
+}
+#apDiv10 {
+	position:absolute;
+	width:950px;
+	height:440px;
+	z-index:2;
+	left: 2px;
+	top: 62px;
+}
+#divTest{
+padding:5dp;
+align:center;
+}
+#apDiv11 {
+	position:absolute;
+	width:111px;
+	height:41px;
+	z-index:5;
+	left: 156px;
+	top: 160px;
+}
+#apDiv12 {
+	position:absolute;
+	width:200px;
+	height:50px;
+	z-index:5;
+	left: 59px;
+	top: 163px;
+}
+#apDiv13 {
+	position:absolute;
+	width:50px;
+	height:50px;
+	z-index:5;
+}
+#apDiv14 {
+	position:absolute;
+	width:145px;
+	height:45px;
+	z-index:6;
+	left: 55px;
+	top: 5px;
+}
+#apDiv15 {
+	position:absolute;
+	width:195px;
+	height:20px;
+	z-index:5;
+	left: 65px;
+	top: 140px;
 }
 
-function handleCharacteristicValueChanged(event) {
-    var s = event.target.value;
-    var i, n = s.byteLength;
-    for (i = 0; i < n;){
-        var k = s.getInt8(i++);
-        var v = s.getInt8(i++);
-        switch(k){
-        case 0x22:
-            lpwr = v;
-	
-			var myInput = document.getElementById('tcpwr')
-			if (myInput != document.activeElement) {
-                myInput.value = hpwr + lpwr;
-              }
-         //   cpwr.innerHTML = hpwr + lpwr;
-            break;
-        case 0x23:
-            hpwr = v << 8;
-			
-			var myInput = document.getElementById('tcpwr')
-			if (myInput != document.activeElement) {
-                myInput.value = hpwr + lpwr;
-              }
-			
-           // cpwr.innerHTML = hpwr + lpwr;
-            break;
-        case 0x24:
-            lpph = v;
-			
-			var myInput = document.getElementById('tcpph')
-			if (myInput != document.activeElement) {
-                myInput.value = hpph + lpph;
-              }
-            //cpph.innerHTML = hpph + lpph;
-            break;
-        case 0x25:
-            hpph = v << 8;
-			var myInput = document.getElementById('tcpph')
-			if (myInput != document.activeElement) {
-                myInput.value = hpph + lpph;
-              }
-           // cpph.innerHTML = hpph + lpph;
-            break;
-        case 0x26:
+-->
+    </style>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/L_slide.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	//affect:1
+	$(".af1").slide({
+		affect:1,
+		time:3000,
+		speed:400,
+		dot_text:false,
+	});
 		
-		var myInput = document.getElementById('tctst')
-			if (myInput != document.activeElement) {
-                myInput.value = v;
-              }
-          //  ctst.innerHTML = v;
-            break;
-        case 0x27:
-		var myInput = document.getElementById('tctst')
-            //ctst.innerHTML = v;
-            break;
-        case 0x28:
-            ltmr = v;
-			
-			var myInput = document.getElementById('tctmr')
-			if (myInput != document.activeElement) {
-                myInput.value = htmr + ltmr;
-              }
-          //  ctmr.innerHTML = htmr + ltmr;
-            break;
-        case 0x29:
-            htmr = v << 8;
-			
-			var myInput = document.getElementById('tctmr')
-			if (myInput != document.activeElement) {
-                myInput.value = htmr + ltmr;
-              }
-            //ctmr.innerHTML = htmr + ltmr;
-            break;
-        case 0x2a:
-            ltmp = v;
-			
-			var myInput = document.getElementById('tctmp')
-			if (myInput != document.activeElement) {
-                myInput.value = htmr + ltmr;
-              }
-           // ctmp.innerHTML = htmp + ltmp;
-            break;
-        case 0x2b:
-            htmp = v << 8;
-			
-			var myInput = document.getElementById('tctmp')
-			if (myInput != document.activeElement) {
-                myInput.value = htmr + ltmr;
-              }
-           // ctmp.innerHTML = htmp + ltmp;
-            break;
-        case 0x2c:
-		    var myInput = document.getElementById('tcind')
-			if (myInput != document.activeElement) {
-                myInput.value = v;
-              }
-           //cind.innerHTML = v;
-            break;
-        case 0x2d:
-		    var myInput = document.getElementById('tcind')
-			if (myInput != document.activeElement) {
-                myInput.value = v;
-              }
-            //cmod.innerHTML = v;
-            break;
-        case 0x62:
-            lerr = v;
-            rerr.innerHTML = herr + lerr;
-            break;
-        case 0x63:
-            herr = v << 8;
-            rerr.innerHTML = herr + lerr;
-            break;
-        case 0x64:
-            lvol = v;
-            rvol.innerHTML = hvol + lvol;
-            break;
-        case 0x65:
-            hvol = v << 8;
-            rvol.innerHTML = hvol + lvol;
-            break;
-        case 0x66:
-            lcur = v;
-            rcur.innerHTML = hcur + lcur;
-            break;
-        case 0x67:
-            hcur = v << 8;
-            rcur.innerHTML = hcur + lcur;
-            break;
-        case 0x68:
-            ltpr = v;
-            rtpr.innerHTML = htpr + ltpr;
-            break;
-        case 0x69:
-            htpr = v << 8;
-            rtpr.innerHTML = htpr + ltpr;
-            break;
-        case 0x6a:
-            rtst.innerHTML = v;
-            break;
-        case 0x6c:
-            lsnk = v;
-            rsnk.innerHTML = hsnk + lsnk;
-            break;
-        case 0x6d:
-            hsnk = v << 8;
-            rsnk.innerHTML = hsnk + lsnk;
-            break;
-        case 0x6e:
-            lclk = v;
-            rclk.innerHTML = hclk + lclk;
-            break;
-        case 0x6f:
-            hclk = v << 8;
-            rclk.innerHTML = hclk + lclk;
-            break;
-        case 0x70:
-            lpls = v;
-            rpls.innerHTML = hpls + lpls;
-            break;
-        case 0x71:
-            hpls = v << 8;
-            rpls.innerHTML = hpls + lpls;
-            break;
-        case 0x72:
-            lcol = v;
-            rcol.innerHTML = hcol + lcol;
-            break;
-        case 0x73:
-            hcol = v << 8;
-            rcol.innerHTML = hcol + lcol;
-            break;
-        case 0x74:
-            rtop.innerHTML = v;
-            break;
-        case 0x76:
-            lver = v;
-            rver.innerHTML = hver + lver;
-            break;
-        case 0x77:
-            hver = v << 8;
-            rver.innerHTML = hver + lver;
-            break;
-        case 0x78:
-            lenv = v;
-            renv.innerHTML = henv + lenv;
-            break;
-        case 0x79:
-            henv = v << 8;
-            renv.innerHTML = henv + lenv;
-            break;
-        case 0x7e:
-            rbtn.innerHTML = v;
-            break;
-        case 0x7f:
-            rknb.innerHTML = v;
-            break;
-        default:
-            console.log('k: ' + k + ', v: ' + v);
-        }
-    }
-}
+})
 </script>
+</head>
+<body>
+	<div id="apDiv1"  style="background:#000; color:#FFF">
+	  <div id="apDiv2">
+	    <table width="201" height="65" border="0">
+          <tr>
+            <td><h1 align="center" class="style5"> a.kitchen</h1></td>
+          </tr>
+        </table>
+      </div>
+	  <div id="apDiv3">
+	    <table width="480" height="63" border="0" bordercolor="#FFFFFF" bgcolor="#000000">
+          <tr class="style3">
+            <td><div align="center">首页</div></td>
+            <td><div align="center">美食专题</div></td>
+            <td><div align="center">食材大全</div></td>
+            <td><div align="center">关于</div></td>
+          </tr>
+        </table>
+	  </div>
+	</div>
+   
+      <div id="apDiv6"  style="background:#666; color:#666">
+        <div id="apDiv7">
+       <div class="wrap af1">
+	<ul class="slidebox">
+		<li><a href="#"><img src="image/1.jpg" /></a></li>
+		<li><a href="#"><img src="image/2.jpg" /></a></li>
+		<li><a href="#"><img src="image/3.jpg" /></a></li>
+		<li><a href="#"><img src="image/4.jpg" /></a></li>
+	</ul>
+</div>
+        </div>
+</div>
+    
+<div id="apDiv5" style="background:#000; color:#FFF"></div>
+<div id="apDiv8">
+  <div id="apDiv4">
+    <div id="apDiv9"><h1 align="center" class="style5"> 
+          <table width="201" height="65" border="0">
+          <tr>
+            <td><h1 align="center" class="style5"> 推荐菜谱</h1></td>
+          </tr>
+    </table></div>
+    <div id="apDiv10">
+      <table width="950" height="440" border="0">
+        <tr>
+          <td><div class = "divTest" align="center">
+            <div id="apDiv15">
+              <div align="left">台式三杯子鸡</div>
+            </div>
+            <p><a href="content.html"><img src="image/2.jpg" width="200" height="100" /></a></p>
+            <div id="apDiv12">
+              <div align="left">
+                <div id="apDiv13"><a href="#"><img src="image/5.jpg" width="50" height="50" /></a></div>
+              </div>
+              <div id="apDiv14">
+                <div align="left">
+                  <p>阿基师</p>
+                  <p>台湾著名料理人</p>
+                </div>
+              </div>
+            </div>
+          </div></td>
+          <td><div class = "divTest" align="center"><a href="content.html"><img src="image/1.jpg" width="200" height="100" /></a></div></td>
+          <td><div class = "divTest" align="center"><a href="content.html"><img src="image/3.jpg" width="200" height="100" /></a></div></td>
+        </tr>
+        <tr>
+          <td><div class = "divTest" align="center"><a href="content.html"><img src="image/4.jpg" width="200" height="100" /></a></div></td>
+          <td><div class = "divTest" align="center"><a href="content.html"><img src="image/4.jpg" width="200" height="100" /></a></div></td>
+          <td><div class = "divTest" align="center"><a href="content.html"><img src="image/4.jpg" width="200" height="100" /></a></div></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+	
+	
 </html>
