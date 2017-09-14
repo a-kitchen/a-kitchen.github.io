@@ -38,7 +38,17 @@ function xia(){
 	var time = __lis[_lineno].time;
 	  if(time > 0){
 		  down.disabled = "true";
-		  //setTimeout("updatetest()",1000);
+		  
+	var destime=time/1000;
+	var  timer=setInterval(function() {
+		down.value ="等待"+destime+"秒下一步"
+		if(destime == 0){
+			clearInterval(timer); 
+			down.value="下一步"
+		}
+		destime--;
+    console.log(destime);
+     }, 1000);
 	  }
 	  setTimeout("wait()",time);
 	
