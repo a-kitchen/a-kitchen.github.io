@@ -36,10 +36,12 @@ function xia(){
 
     _lineno++;
 	var time = __lis[_lineno].time;
+	  setTimeout("wait()",time);
+	  
 	  if(time > 0){
 		  down.disabled = "true";
 		  
-	var destime=time/1000;
+	var destime=(time-1000)/1000;
 	var  timer=setInterval(function() {
 		down.value ="等待"+destime+"秒下一步"
 		if(destime == 0){
@@ -50,7 +52,7 @@ function xia(){
     console.log(destime);
      }, 1000);
 	  }
-	  setTimeout("wait()",time);
+	
 	
 	__eul.children[_lineno-1].setAttribute("class", "");
 	var _ep = __eul.children[_lineno];
@@ -100,8 +102,8 @@ __scroll = function(_crt, _dst, _step){
 	setTimeout(__scroll.bind(this, _crt, _dst, _step), __freq);
 };
 
-(function(){
 
+(function(){
 (function(){
 for (var i = 0; i < __lis.length; i++) {
 	var eli = document.createElement("li");
