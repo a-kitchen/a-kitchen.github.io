@@ -1,39 +1,13 @@
 <html>
 <head>
 <style type="text/css">
-
-#apDiv1 {
-	position:absolute;
-	width:100%;
-	height:65px;
-	top: 0;
-	left: 0;
-}
-#apDiv2 {
-	position:absolute;
-	width:200px;
-	height:65px;
-	left: 20%;
-	top: 0px;
-}
-#apDiv3 {
-	position:absolute;
-	width:480px;
-	height:64px;
-	z-index:2;
-	left: 60%;
-	top: 1px;
-}
-
 * {margin:0;padding:0;}
 ul {list-style:none;}
 .style3 {
 	color: #FFFFFF
 }
 
-.style5 {
-	color: #FFD700;
-}
+
 #apDiv5 {
 	position:absolute;
 	width:100%;
@@ -62,8 +36,8 @@ top: 200px;
 .lrc li{display:block;padding:5px 0;}
 .z-crt{color:#ffff00;}
 
-
-    </style>
+  </style>
+  <link href="css/model.css" rel='stylesheet' type='text/css' />
 <meta charset="UTF-8">
 <title>台式三杯鸡</title>
 </head>
@@ -103,116 +77,12 @@ top: 200px;
 		</ul>
 	</div>	
     <br>
-       <input type="button" value="下一步"  onclick="xia()" style="width:120px;height:40px;border:2px blue none;background-color:red;">
+       <input type="button" id="down" value="下一步"  onclick="xia()" style="width:120px;height:40px;border:2px blue none;background-color:red;">
       </center>
   </div>
 </div>
-
-<script language="javascript">
-
-var vList = ['mv/1.mp4', 'mv/2.mp4', 'mv/3.mp4'];
-  var curr = 0; 
-
-var __lis = [{"text":"将炒锅洗净擦干放在炉面上"}, 
-			{"text":"向锅内加入一茶植物油"}, 
-			{"text":"放入01腌制好的鸡翅"},
-			{"text":"逐个鸡翅翻面"},
-			{"text":"晃动锅子使鸡翅滑动"},
-			{"text":"加入02青椒和红椒"},
-			{ "text":"晃动锅子"},
-			{ "text":"加入03混合好的调味汁（糖，米酒，金兰酱油，麻油，金兰油膏，水）"},
-			{ "text":"盛出鸡翅和青红椒备用"},
-			{ "text":"将炒锅洗净擦干，放在炉面上"},
-			{ "text":"向锅内加入2汤匙植物油"},
-			{ "text":"加入04干葱头，大蒜，生姜"},
-			{ "text":"加入炒好的鸡翅和青红椒"},
-			{ "text":"加入0520克九层塔"},
-			{ "end":9999, "text":"烹饪完成"}];
-
-
-var __eul = document.getElementById("lrc");
-var  _lineno = 0; 
-
-var __freq = 20; // 滚动频率（ms）
-var __fraction = 2/5; // 高亮显示行在歌词显示区域中的固定位置百分比 
-function xia(){
-
-  curr++;
-   if(curr>2){
-   curr = 0;
-   }
-  var playe= document.getElementById("playe");
-  playe.src =  vList[curr];
-
-
-     _lineno++;
-	if (_lineno > 0) {
-		__eul.children[_lineno-1].setAttribute("class", "");
-	}
-	var _ep = __eul.children[_lineno];
-	_ep.setAttribute("class", "z-crt");
-	
-	 if(__lis[_lineno].end == 9999){
-	  console.log("烹饪完成");
-	 }
-	
-	
-		// 满足需求5，6
-	var _scrollTop;
-	if (_ep.offsetTop < __eul.clientHeight*__fraction){
-		_scrollTop = 0;
-	} else if (_ep.offsetTop > (__eul.scrollHeight - __eul.clientHeight*(1-__fraction))){
-		_scrollTop = __eul.scrollHeight - __eul.clientHeight;
-	} else {
-		_scrollTop = _ep.offsetTop - __eul.clientHeight*__fraction;
-	}
-
-	// 如用户拖动滚动条导致当前显示行超出显示区域范围，下一行直接定位到当前显示行
-	if (__eul.scrollTop > (_scrollTop + __eul.clientHeight*__fraction)
-		|| (__eul.scrollTop + __eul.clientHeight*__fraction) < _scrollTop){
-		__eul.scrollTop = _scrollTop;
-	} else { // 单行滚动
-		// 获取滚动步长
-		var _step = Math.ceil(Math.abs(__eul.scrollTop - _scrollTop)/(__freq));
-		__scroll(__eul.scrollTop, _scrollTop, _step);		
-	}
-}
-
-/**
- * 歌词单行滚动实现
- */
-__scroll = function(_crt, _dst, _step){
-	if(Math.abs(_crt - _dst) < _step){
-		return;
-	}
-	if(_crt < _dst){
-		__eul.scrollTop += _step;
-		_crt += _step;
-	} else {
-		__eul.scrollTop -= _step;
-		_crt -= _step;
-	}
-	setTimeout(__scroll.bind(this, _crt, _dst, _step), __freq);
-};
-
-(function(){
-
-(function(){
-for (var i = 0; i < __lis.length; i++) {
-	var eli = document.createElement("li");
-	eli.innerText = __lis[i].text;
-	__eul.appendChild(eli);
-}
-
-
-		
-			var _ep = __eul.children[0];
-	_ep.setAttribute("class", "z-crt");
-
-})();
-
-})();
-</script>
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+<script type="text/javascript" src="js/practice.js"></script>
 
 </body>
 </html>
