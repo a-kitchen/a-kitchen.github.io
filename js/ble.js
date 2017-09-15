@@ -4,6 +4,17 @@ uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
 
+
+function show_confirm()
+{
+var r=confirm("食材是否准备好！");
+if (r==true)
+  {
+  go();
+  }
+
+}
+
 function go(){
     navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
     .then(device => {
@@ -15,13 +26,9 @@ function go(){
        return server.getPrimaryService(uuid_tnnl);
    }).then(service => {
    chosenHeartRateService = service;
+     window.location.href="practice.html";
   });
-         })
-     // ]);
-    }).catch(error => {
-      console.log(error);
-    });
-}
+         };
 
 
 function set(value){
