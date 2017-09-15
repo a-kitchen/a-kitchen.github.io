@@ -15,15 +15,30 @@ function go(){
        return server.getPrimaryService(uuid_tnnl);
    }).then(service => {
    chosenHeartRateService = service;
-    //  return Promise.all([
-         service.getCharacteristic(uuid_down).then(characteristic => {
-         characteristic.startNotifications()
-  .then(characteristic => {
-  //  characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
   });
          })
      // ]);
     }).catch(error => {
       console.log(error);
     });
+}
+
+
+function set(value){
+    if(isByte(rese[0])){
+	rese[1] = value;
+	rese[2] = CMD_ID;
+	rese[3] = 0;
+	}else{
+    var star = value/256;
+    var dest = value%256;
+    rese[1] = dest;
+    rese[3] = star;
+	}
+	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+    characteristic.writeValue(rese);
+     });
+   console.log(rese);
+  document.getElementById("w").innerHTML=rese;
+
 }

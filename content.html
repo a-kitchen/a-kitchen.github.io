@@ -55,6 +55,7 @@ ul {list-style:none;}
 -->
     </style>
 <meta charset="UTF-8">
+<script type="text/javascript" src="js/ble.js"></script>
 <title>台式三杯鸡</title>
 </head>
 <body>
@@ -117,6 +118,7 @@ function show_confirm()
 var r=confirm("食材是否准备好！");
 if (r==true)
   {
+  go();
   window.location.href="practice.html";
   }
 

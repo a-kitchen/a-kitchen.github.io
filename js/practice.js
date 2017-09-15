@@ -1,27 +1,27 @@
 var vList = ['mv/1.mp4', 'mv/2.mp4', 'mv/3.mp4'];
 var curr = 0; 
 
-var __lis = [{"time":0,"text":"将炒锅洗净擦干放在炉面上"}, 
-			{"time":5000,"text":"向锅内加入一茶植物油"}, 
-			{"time":10000,"text":"放入01腌制好的鸡翅"},
-			{"time":10000,"text":"逐个鸡翅翻面"},
-			{"time":5000,"text":"晃动锅子使鸡翅滑动"},
-			{"time":15000,"text":"加入02青椒和红椒"},
-			{"time":5000,"text":"晃动锅子"},
-			{"time":15000, "text":"加入03混合好的调味汁（糖，米酒，金兰酱油，麻油，金兰油膏，水）"},
-			{"time":0, "text":"盛出鸡翅和青红椒备用"},
-			{"time":0, "text":"将炒锅洗净擦干，放在炉面上"},
-			{"time":5000, "text":"向锅内加入2汤匙植物油"},
-			{"time":10000, "text":"加入04干葱头，大蒜，生姜"},
-			{"time":8000, "text":"加入炒好的鸡翅和青红椒"},
-			{"time":6000, "text":"加入0520克九层塔"},
+var __lis = [{"power":0,"time":0,"text":"将炒锅洗净擦干放在炉面上"}, 
+			{"power":22000,"time":5000,"text":"向锅内加入一茶植物油"}, 
+			{"power":22000,"time":10000,"text":"放入01腌制好的鸡翅"},
+			{"power":22000,"time":10000,"text":"逐个鸡翅翻面"},
+			{"power":22000,"time":5000,"text":"晃动锅子使鸡翅滑动"},
+			{"power":22000,"time":15000,"text":"加入02青椒和红椒"},
+			{"power":22000,"time":5000,"text":"晃动锅子"},
+			{"power":18000,"time":15000, "text":"加入03混合好的调味汁（糖，米酒，金兰酱油，麻油，金兰油膏，水）"},
+			{"power":0,"time":0, "text":"盛出鸡翅和青红椒备用"},
+			{"power":0,"time":0, "text":"将炒锅洗净擦干，放在炉面上"},
+			{"power":22000,"time":5000, "text":"向锅内加入2汤匙植物油"},
+			{"power":18000,"time":10000, "text":"加入04干葱头，大蒜，生姜"},
+			{"power":18000,"time":8000, "text":"加入炒好的鸡翅和青红椒"},
+			{"power":22000,"time":6000, "text":"加入0520克九层塔"},
 			{ "end":9999, "text":"烹饪完成"}];
 
 var __eul = document.getElementById("lrc");
 var  _lineno = 0; 
 
-var __freq = 20; // 滚动频率（ms）
-var __fraction = 2/5; // 高亮显示行在歌词显示区域中的固定位置百分比 
+var __freq = 20; 
+var __fraction = 2/5; 
 	  var down= document.getElementById("down");
 
 function xia(){
