@@ -147,7 +147,18 @@ for (var i = 0; i < __lis.length; i++) {
 	__eul.appendChild(eli);
 }
 	
-	go();
+	   navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
+    .then(device => {
+        console.log('device.gatt.connect');
+        return device.gatt.connect();
+   }).then(server => {
+       console.log('server.getPrimaryService');
+       return server.getPrimaryService(uuid_tnnl);
+   }).then(service => {
+   chosenHeartRateService = service;
+     window.location.href="practice.html";
+	 
+  });
 	
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");
