@@ -31,17 +31,11 @@ function go(){
          };
 
 
+let rese= new Uint8Array(4);
 function set(value){
-    if(isByte(rese[0])){
+	rese[0] = CMD_INDICATOR;
 	rese[1] = value;
-	rese[2] = CMD_ID;
-	rese[3] = 0;
-	}else{
-    var star = value/256;
-    var dest = value%256;
-    rese[1] = dest;
-    rese[3] = star;
-	}
+	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });

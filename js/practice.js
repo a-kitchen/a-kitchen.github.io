@@ -1,20 +1,66 @@
+let chosenHeartRateService = null;
+uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
+uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
+uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
+
+
+function show_confirm()
+{
+var r=confirm("食材是否准备好！");
+if (r==true)
+  {
+  go();
+  }
+
+}
+
+function go(){
+    navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
+    .then(device => {
+        console.log('device.gatt.connect');
+        return device.gatt.connect();
+   }).then(server => {
+       console.log('server.getPrimaryService');
+       return server.getPrimaryService(uuid_tnnl);
+   }).then(service => {
+   chosenHeartRateService = service;
+     window.location.href="practice.html";
+	 
+  });
+         };
+
+
+let rese= new Uint8Array(4);
+function set(value){
+	rese[0] = CMD_INDICATOR;
+	rese[1] = value;
+	
+	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+    characteristic.writeValue(rese);
+     });
+   console.log(rese);
+  document.getElementById("w").innerHTML=rese;
+
+}
+
+
 var vList = ['mv/1.mp4', 'mv/2.mp4', 'mv/3.mp4'];
 var curr = 0; 
 
 var __lis = [{"power":0,"time":0,"text":"将炒锅洗净擦干放在炉面上"}, 
-			{"power":22000,"time":5000,"text":"向锅内加入一茶植物油"}, 
-			{"power":22000,"time":10000,"text":"放入01腌制好的鸡翅"},
-			{"power":22000,"time":10000,"text":"逐个鸡翅翻面"},
-			{"power":22000,"time":5000,"text":"晃动锅子使鸡翅滑动"},
-			{"power":22000,"time":15000,"text":"加入02青椒和红椒"},
-			{"power":22000,"time":5000,"text":"晃动锅子"},
-			{"power":18000,"time":15000, "text":"加入03混合好的调味汁（糖，米酒，金兰酱油，麻油，金兰油膏，水）"},
+			{"power":9,"time":5000,"text":"向锅内加入一茶植物油"}, 
+			{"power":7,"time":10000,"text":"放入01腌制好的鸡翅"},
+			{"power":7,"time":10000,"text":"逐个鸡翅翻面"},
+			{"power":9,"time":5000,"text":"晃动锅子使鸡翅滑动"},
+			{"power":9,"time":15000,"text":"加入02青椒和红椒"},
+			{"power":9,"time":5000,"text":"晃动锅子"},
+			{"power":9,"time":15000, "text":"加入03混合好的调味汁（糖，米酒，金兰酱油，麻油，金兰油膏，水）"},
 			{"power":0,"time":0, "text":"盛出鸡翅和青红椒备用"},
 			{"power":0,"time":0, "text":"将炒锅洗净擦干，放在炉面上"},
-			{"power":22000,"time":5000, "text":"向锅内加入2汤匙植物油"},
-			{"power":18000,"time":10000, "text":"加入04干葱头，大蒜，生姜"},
-			{"power":18000,"time":8000, "text":"加入炒好的鸡翅和青红椒"},
-			{"power":22000,"time":6000, "text":"加入0520克九层塔"},
+			{"power":9,"time":5000, "text":"向锅内加入2汤匙植物油"},
+			{"power":6,"time":10000, "text":"加入04干葱头，大蒜，生姜"},
+			{"power":9,"time":8000, "text":"加入炒好的鸡翅和青红椒"},
+			{"power":6,"time":6000, "text":"加入0520克九层塔"},
 			{ "end":9999, "text":"烹饪完成"}];
 
 var __eul = document.getElementById("lrc");
@@ -33,6 +79,8 @@ function xia(){
    
   var playe= document.getElementById("playe");
   playe.src =  vList[curr];
+  
+  set(__lis[_lineno].power);
 
     _lineno++;
 	var time = __lis[_lineno].time;
