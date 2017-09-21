@@ -2,6 +2,7 @@ let chosenHeartRateService = null;
 uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
+ CMD_INDICATOR = 0x2c;
 
 
 function show_confirm()
