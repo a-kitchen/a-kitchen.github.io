@@ -1,18 +1,8 @@
+
 let chosenHeartRateService = null;
 uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
-
-
-function show_confirm()
-{
-var r=confirm("食材是否准备好！");
-if (r==true)
-  {
-  go();
-  }
-
-}
 
 function go(){
     navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
@@ -34,17 +24,11 @@ let rese= new Uint8Array(4);
 function set(value){
 	rese[0] = 0x2c;
 	rese[1] = value;
-	if(chosenHeartRateService != null){
-		chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
+	
+	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
-	}else{
-		console.log('chosenHeartRateService');
-	}
-	
    console.log(rese);
-  document.getElementById("w").innerHTML=rese;
-
 }
 
 
@@ -162,6 +146,8 @@ for (var i = 0; i < __lis.length; i++) {
 	eli.innerText = __lis[i].text;
 	__eul.appendChild(eli);
 }
+	
+	go();
 	
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");

@@ -33,13 +33,11 @@ function go(){
 
 let rese= new Uint8Array(4);
 function set(value){
-	rese[0] = CMD_INDICATOR;
+	rese[0] = 0x2c;
 	rese[1] = value;
 	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
    console.log(rese);
-  document.getElementById("w").innerHTML=rese;
-
 }
