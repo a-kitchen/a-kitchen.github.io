@@ -18,7 +18,6 @@ if (r==true)
 function go(){
     navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
     .then(device => {
-       rmot.innerHTML = device.name;
         console.log('device.gatt.connect');
         return device.gatt.connect();
    }).then(server => {
