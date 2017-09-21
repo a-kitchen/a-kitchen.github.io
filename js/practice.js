@@ -139,7 +139,7 @@ __scroll = function(_crt, _dst, _step){
 };
 
 
-(function(){
+
 (function(){
 for (var i = 0; i < __lis.length; i++) {
 	var eli = document.createElement("li");
@@ -157,5 +157,5 @@ for (var i = 0; i < __lis.length; i++) {
 
 })();
 
-})();
+
 
