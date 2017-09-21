@@ -2,7 +2,6 @@ let chosenHeartRateService = null;
 uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
- CMD_INDICATOR = 0x2c;
 
 
 function show_confirm()
@@ -33,7 +32,7 @@ function go(){
 
 let rese= new Uint8Array(4);
 function set(value){
-	rese[0] = CMD_INDICATOR;
+	rese[0] = 0x2c;
 	rese[1] = value;
 	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
