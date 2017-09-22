@@ -17,6 +17,7 @@ function go(){
      window.location.href="practice.html";
 	 
   });
+  
          };
 
 
@@ -59,6 +60,7 @@ var __fraction = 2/5;
 	  var down= document.getElementById("down");
 
 function xia(){
+	go();
 	
   curr++;
    if(curr>2){
@@ -153,12 +155,6 @@ for (var i = 0; i < __lis.length; i++) {
    var zhText = __lis[0].text;
    responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
    
-   var r=confirm("食材是否准备好！");
-if (r==true)
-  {
-   go();
-  }
-
 })();
 
 })();
