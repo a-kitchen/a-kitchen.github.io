@@ -26,7 +26,8 @@ function go(){
    }).then(service => {
    chosenHeartRateService = service;
    	//  window.sesssionStorage.set
-     window.location.href="practice.html";
+     //window.location.href="practice.html";
+	 window.open("practice.html");
 	 
   });
          };
