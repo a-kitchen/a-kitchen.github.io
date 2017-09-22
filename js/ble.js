@@ -25,7 +25,7 @@ function go(){
        return server.getPrimaryService(uuid_tnnl);
    }).then(service => {
    chosenHeartRateService = service;
-   	  sesssionStorage.setObj(1,chosenHeartRateService);
+   	//  sesssionStorage.setObj(1,chosenHeartRateService);
      window.location.href="practice.html";
 	 
   });
