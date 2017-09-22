@@ -58,16 +58,16 @@ var  _lineno = 0;
 var __freq = 20; 
 var __fraction = 2/5; 
 	  var down= document.getElementById("down");
+	    var playe= document.getElementById("playe");
+		playe.click():
 
 function xia(){
-	go();
-	
   curr++;
    if(curr>2){
    curr = 0;
    }
    
-  var playe= document.getElementById("playe");
+
   playe.src =  vList[curr];
   
   set(__lis[_lineno].power);
