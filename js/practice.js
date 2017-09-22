@@ -3,6 +3,7 @@ let chosenHeartRateService = null;
 uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
+go();
 
 function go(){
     navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
@@ -139,7 +140,7 @@ __scroll = function(_crt, _dst, _step){
 };
 
 
-
+(function(){
 (function(){
 for (var i = 0; i < __lis.length; i++) {
 	var eli = document.createElement("li");
@@ -147,18 +148,7 @@ for (var i = 0; i < __lis.length; i++) {
 	__eul.appendChild(eli);
 }
 	
-	   navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
-    .then(device => {
-        console.log('device.gatt.connect');
-        return device.gatt.connect();
-   }).then(server => {
-       console.log('server.getPrimaryService');
-       return server.getPrimaryService(uuid_tnnl);
-   }).then(service => {
-   chosenHeartRateService = service;
-     window.location.href="practice.html";
-	 
-  });
+	
 	
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");
@@ -168,5 +158,5 @@ for (var i = 0; i < __lis.length; i++) {
 
 })();
 
-
+})();
 
