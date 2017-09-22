@@ -33,7 +33,7 @@ function go(){
 
 
 let rese= new Uint8Array(4);
-function set(value){
+function setzhi(value){
 	rese[0] = 0x2c;
 	rese[1] = value;
 	
