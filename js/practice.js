@@ -70,7 +70,7 @@ function xia(){
   playe.src =  vList[curr];
   
  // set(__lis[_lineno].power);
- window.opener.set(5);
+ window.opener.set(curr);
 
     _lineno++;
 	var time = __lis[_lineno].time;
