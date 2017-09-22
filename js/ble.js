@@ -10,7 +10,6 @@ function show_confirm()
 var r=confirm("食材是否准备好！");
 if (r==true)
   {
-	  sesssionStorage.setObj(1,chosenHeartRateService);
   go();
   }
 
@@ -26,6 +25,7 @@ function go(){
        return server.getPrimaryService(uuid_tnnl);
    }).then(service => {
    chosenHeartRateService = service;
+   	  sesssionStorage.setObj(1,chosenHeartRateService);
      window.location.href="practice.html";
 	 
   });
