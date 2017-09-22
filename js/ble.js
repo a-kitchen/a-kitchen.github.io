@@ -10,6 +10,7 @@ function show_confirm()
 var r=confirm("食材是否准备好！");
 if (r==true)
   {
+	  sesssionStorage.setObj(1,chosenHeartRateService);
   go();
   }
 

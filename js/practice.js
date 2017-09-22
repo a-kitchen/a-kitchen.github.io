@@ -25,6 +25,7 @@ let rese= new Uint8Array(4);
 function set(value){
 	rese[0] = 0x2c;
 	rese[1] = value;
+	chosenHeartRateService=getObj(1);
 	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
@@ -59,7 +60,6 @@ var __freq = 20;
 var __fraction = 2/5; 
 	  var down= document.getElementById("down");
 	    var playe= document.getElementById("playe");
-		playe.click();
 function xia(){
   curr++;
    if(curr>2){
@@ -69,7 +69,7 @@ function xia(){
 
   playe.src =  vList[curr];
   
-  //set(__lis[_lineno].power);
+  set(__lis[_lineno].power);
 
     _lineno++;
 	var time = __lis[_lineno].time;
