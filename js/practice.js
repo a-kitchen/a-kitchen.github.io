@@ -59,7 +59,7 @@ var __freq = 20;
 var __fraction = 2/5; 
 	  var down= document.getElementById("down");
 	    var playe= document.getElementById("playe");
-		playe.click():
+		playe.click();
 
 function xia(){
   curr++;
