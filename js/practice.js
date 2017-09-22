@@ -3,7 +3,6 @@ let chosenHeartRateService = null;
 uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
-go();
 
 function go(){
     navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
@@ -148,13 +147,17 @@ for (var i = 0; i < __lis.length; i++) {
 	__eul.appendChild(eli);
 }
 	
-	
-	
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");
 	
    var zhText = __lis[0].text;
    responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
+   
+   var r=confirm("食材是否准备好！");
+if (r==true)
+  {
+   go();
+  }
 
 })();
 
