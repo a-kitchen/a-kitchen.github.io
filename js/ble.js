@@ -36,6 +36,7 @@ let rese= new Uint8Array(4);
 function setzhi(value){
 	rese[0] = 0x2c;
 	rese[1] = value;
+	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
      });
