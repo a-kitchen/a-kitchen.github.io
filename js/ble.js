@@ -7,12 +7,16 @@ uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
 
 function show_confirm()
 {
-
+var r=confirm("食材是否准备好！");
+if (r==true)
+  {
 	  
 	    window.location.href="practice.html";
 
 
-}
+
+  }
+  }
 
 function go(){
     navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})

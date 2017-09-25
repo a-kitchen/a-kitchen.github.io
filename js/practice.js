@@ -4,8 +4,9 @@ uuid_tnnl = '00000000-0000-1000-8000-00805f9b34fb';
 uuid_writ = '00000001-0000-1000-8000-00805f9b34fb';
 uuid_down = '00000002-0000-1000-8000-00805f9b34fb';
 
-function go(){
-    navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
+function conn(){
+	
+	   navigator.bluetooth.requestDevice({filters:[{services: [uuid_tnnl]}]})
     .then(device => {
         console.log('device.gatt.connect');
         return device.gatt.connect();
@@ -14,9 +15,50 @@ function go(){
        return server.getPrimaryService(uuid_tnnl);
    }).then(service => {
    chosenHeartRateService = service;
-     window.location.href="practice.html";
+   
+   
+      
+     
+   	  var con= document.getElementById("apDiv4");
+   con.style.visibility = "visible";
+   
+   	  var down2= document.getElementById("down2");
+	  down2..style.visibility = "hidden";
+   
+   for (var i = 0; i < __lis.length; i++) {
+	var eli = document.createElement("li");
+	eli.innerText = __lis[i].text;
+	__eul.appendChild(eli);
+}
+
+	var _ep = __eul.children[0];
+	_ep.setAttribute("class", "z-crt");
+	
+   var zhText = __lis[0].text;
+   responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
+   con.style.visibility = "visible";
+   
+   for (var i = 0; i < __lis.length; i++) {
+	var eli = document.createElement("li");
+	eli.innerText = __lis[i].text;
+	__eul.appendChild(eli);
+}
+
+	var _ep = __eul.children[0];
+	_ep.setAttribute("class", "z-crt");
+	
+   var zhText = __lis[0].text;
+   responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
+
 	 
   });
+	
+	
+  
+
+    
+	 
+
   
          };
 
@@ -144,26 +186,7 @@ __scroll = function(_crt, _dst, _step){
 
 (function(){
 (function(){
-for (var i = 0; i < __lis.length; i++) {
-	var eli = document.createElement("li");
-	eli.innerText = __lis[i].text;
-	__eul.appendChild(eli);
-}
 
-	var _ep = __eul.children[0];
-	_ep.setAttribute("class", "z-crt");
-	
-   var zhText = __lis[0].text;
-   responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
-   
-   
-   var r=confirm("食材是否准备好！");
-if (r==true)
-  {
-	go();
-	
-	
-  }
    
    
 })();
