@@ -26,7 +26,11 @@ function go(){
    }).then(service => {
    chosenHeartRateService = service;
    	//  window.sesssionStorage.set
-	 window.localStorage.setItem("myobject", chosenHeartRateService); 
+	
+	
+	var objStr=JSON.stringify(chosenHeartRateService);
+	
+	 window.localStorage.setItem("myobject", objStr); 
      window.location.href="practice.html";
 	//window.open("practice.html");
 	 
