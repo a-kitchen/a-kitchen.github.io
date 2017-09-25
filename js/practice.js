@@ -150,13 +150,20 @@ for (var i = 0; i < __lis.length; i++) {
 	__eul.appendChild(eli);
 }
 
-go();
-	
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");
 	
    var zhText = __lis[0].text;
    responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
+   
+   
+   var r=confirm("食材是否准备好！");
+if (r==true)
+  {
+	go();
+
+  }
+   
    
 })();
 
