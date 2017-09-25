@@ -91,11 +91,13 @@ function xia(){
 
   playe.src =  vList[curr];
   
- set(__lis[_lineno].power);
+
  //window.opener.setzhi(__lis[_lineno].power);
 
     _lineno++;
+	 set(__lis[_lineno].power);
 	var time = __lis[_lineno].time;
+
 	  setTimeout("wait()",time);
 	  
 	  if(time > 0){
