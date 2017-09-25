@@ -25,8 +25,8 @@ let rese= new Uint8Array(4);
 function set(value){
 	rese[0] = 0x2c;
 	rese[1] = value;
-	var str =window.localStorage.getItem("myobject");
-	 chosenHeartRateService = JSON.parse(str);
+	var str =window.sesssionStorage.getItem("myobject");
+	 //chosenHeartRateService = JSON.parse(str);
 	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);

@@ -25,12 +25,12 @@ function go(){
        return server.getPrimaryService(uuid_tnnl);
    }).then(service => {
    chosenHeartRateService = service;
-   	//  window.sesssionStorage.set
+   	 window.sesssionStorage.setItem("myobject", objStr);
 	
 	
-	var objStr=JSON.stringify(chosenHeartRateService);
+	//var objStr=JSON.stringify(chosenHeartRateService);
 	
-	 window.localStorage.setItem("myobject", objStr); 
+	// window.localStorage.setItem("myobject", objStr); 
      window.location.href="practice.html";
 	//window.open("practice.html");
 	 
