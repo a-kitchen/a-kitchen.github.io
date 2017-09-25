@@ -10,7 +10,9 @@ function show_confirm()
 var r=confirm("食材是否准备好！");
 if (r==true)
   {
-  go();
+	  
+	    window.location.href="practice.html";
+  //go();
   }
 
 }
@@ -28,7 +30,7 @@ function go(){
    	// window.sesssionStorage.setItem("myobject", objStr);
 
 	
-	//var objStr=JSON.stringify(chosenHeartRateService);
+	var objStr=JSON.stringify(chosenHeartRateService);
 	
 	window.localStorage.setItem("myobject", objStr); 
      window.location.href="practice.html";
