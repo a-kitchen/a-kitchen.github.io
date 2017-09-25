@@ -35,9 +35,7 @@ function conn(){
 	
    var zhText = __lis[0].text;
    responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
-   con.style.visibility = "visible";
-   
-  
+    
          });
 };
 
