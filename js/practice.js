@@ -19,7 +19,7 @@ function conn(){
    
      
    	  var con= document.getElementById("apDiv4");
-   con.style.visibility = "visible";
+   con.style.display = "block";;
    
    	  var down2= document.getElementById("down2");
 	  down2.style.visibility = "hidden";
