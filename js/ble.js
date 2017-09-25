@@ -12,7 +12,7 @@ if (r==true)
   {
 	  
 	    window.location.href="practice.html";
-  //go();
+
   }
 
 }
@@ -30,9 +30,9 @@ function go(){
    	// window.sesssionStorage.setItem("myobject", objStr);
 
 	
-	var objStr=JSON.stringify(chosenHeartRateService);
+	//var objStr=JSON.stringify(chosenHeartRateService);
 	
-	window.localStorage.setItem("myobject", objStr); 
+	//window.localStorage.setItem("myobject", objStr); 
      window.location.href="practice.html";
 	//window.open("practice.html");
 	 
