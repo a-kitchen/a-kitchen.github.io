@@ -76,7 +76,7 @@ var __lis = [{"power":0,"time":0,"text":"将炒锅洗净擦干放在炉面上"},
 			{ "end":9999, "text":"烹饪完成"}];
 
 var __eul = document.getElementById("lrc");
-var  _lineno = 0; 
+var  _lineno = 1; 
 
 var __freq = 20; 
 var __fraction = 2/5; 
@@ -94,9 +94,10 @@ function xia(){
 
  //window.opener.setzhi(__lis[_lineno].power);
 
-    _lineno++;
+     console.log("位置"+_lineno);
 	 set(__lis[_lineno].power);
 	var time = __lis[_lineno].time;
+	 _lineno++;
 
 	  setTimeout("wait()",time);
 	  
