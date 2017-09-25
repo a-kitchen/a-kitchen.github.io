@@ -22,7 +22,7 @@ function conn(){
    con.style.visibility = "visible";
    
    	  var down2= document.getElementById("down2");
-	  down2..style.visibility = "hidden";
+	  down2.style.visibility = "hidden";
    
    for (var i = 0; i < __lis.length; i++) {
 	var eli = document.createElement("li");
@@ -38,7 +38,7 @@ function conn(){
    con.style.visibility = "visible";
    
   
-         };
+         });
 };
 
 
