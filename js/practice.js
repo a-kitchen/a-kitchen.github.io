@@ -161,7 +161,6 @@ for (var i = 0; i < __lis.length; i++) {
 if (r==true)
   {
 	go();
-
   }
    
    
