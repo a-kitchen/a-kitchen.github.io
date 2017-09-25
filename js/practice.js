@@ -17,7 +17,6 @@ function conn(){
    chosenHeartRateService = service;
    
    
-      
      
    	  var con= document.getElementById("apDiv4");
    con.style.visibility = "visible";
@@ -38,29 +37,9 @@ function conn(){
    responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
    con.style.visibility = "visible";
    
-   for (var i = 0; i < __lis.length; i++) {
-	var eli = document.createElement("li");
-	eli.innerText = __lis[i].text;
-	__eul.appendChild(eli);
-}
-
-	var _ep = __eul.children[0];
-	_ep.setAttribute("class", "z-crt");
-	
-   var zhText = __lis[0].text;
-   responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
-
-	 
-  });
-	
-	
-  
-
-    
-	 
-
   
          };
+};
 
 
 let rese= new Uint8Array(4);
