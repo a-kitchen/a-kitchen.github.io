@@ -25,7 +25,7 @@ let rese= new Uint8Array(4);
 function set(value){
 	rese[0] = 0x2c;
 	rese[1] = value;
-	chosenHeartRateService=window.sessionStorage.getObj(1);
+	chosenHeartRateService=window.localStorage.getItem("myobject");
 	
 	chosenHeartRateService.getCharacteristic(uuid_writ).then(characteristic =>{
     characteristic.writeValue(rese);
@@ -69,8 +69,8 @@ function xia(){
 
   playe.src =  vList[curr];
   
- // set(__lis[_lineno].power);
- window.opener.setzhi(__lis[_lineno].power);
+ set(__lis[_lineno].power);
+ //window.opener.setzhi(__lis[_lineno].power);
 
     _lineno++;
 	var time = __lis[_lineno].time;
