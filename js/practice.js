@@ -78,6 +78,7 @@ var __lis = [{"power":0,"time":0,"text":"将炒锅洗净擦干放在炉面上"},
 var __eul = document.getElementById("lrc");
 var  _lineno = 1; 
 
+
 var __freq = 20; 
 var __fraction = 2/5; 
 	  var down= document.getElementById("down");
@@ -97,7 +98,7 @@ function xia(){
      console.log("位置"+_lineno);
 	 set(__lis[_lineno].power);
 	var time = __lis[_lineno].time;
-	 _lineno++;
+	
 
 	  setTimeout("wait()",time);
 	  
@@ -144,6 +145,8 @@ function xia(){
 		var _step = Math.ceil(Math.abs(__eul.scrollTop - _scrollTop)/(__freq));
 		__scroll(__eul.scrollTop, _scrollTop, _step);		
 	}
+	
+	 _lineno++;
 }
 
 function wait(){
