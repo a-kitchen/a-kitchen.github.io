@@ -31,6 +31,9 @@ function conn(){
 }
 
 
+			var zhText = __lis[0].text;
+			responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
+
 
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");
@@ -39,16 +42,9 @@ function conn(){
     
          });
 		 
-		 while(true){
-			var zhText = __lis[0].text;
-				if(zhText.length !=0){
-						responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
-                          console.log("123456");
-					break;
-				}
-
-			 
-		 }
+	
+                 
+		
 };
 
 

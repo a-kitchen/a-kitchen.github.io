@@ -41,6 +41,18 @@ top: 200px;
   <link href="css/model.css" rel='stylesheet' type='text/css' />
 <meta charset="UTF-8">
 <title>台式三杯鸡</title>
+<style type="text/css">
+<!--
+#apDiv6 {
+	position:absolute;
+	width:150px;
+	height:51px;
+	z-index:4;
+	left: 40%;
+	top: 72px;
+}
+-->
+</style>
 </head>
 <body>
 <div id="apDiv1"  style="background:#000; color:#FFF">
@@ -65,15 +77,11 @@ top: 200px;
 </div>
 
 <div id="apDiv5">
-    <div align="center">
-      <input type="button" id="down2" value="连接电磁炉"  onClick="conn()" style="width:120px;height:40px;border:2px blue none;background-color:red;top:65px;">
-    </div>
   <div id="apDiv4" style="display:none;">      
   <center>
         <video  id="playe" width="320" height="240" loop="loop" autoplay="autoplay" muted="true"  onclick="go()">
      <source id = "s" src="mv/1.mp4" type="video/mp4">
-              您的浏览器不支持 video 标签。
-      </video> 
+              您的浏览器不支持 video 标签。      </video> 
     </center>
       <center>
       <div class="box" id="box">
@@ -83,6 +91,10 @@ top: 200px;
     <br>
        <input type="button" id="down" value="下一步"  onclick="xia()" style="width:120px;height:40px;border:2px blue none;background-color:red;">
       </center>
+  </div>
+  <p>&nbsp;</p>
+  <div id="apDiv6">
+    <input name="Button" type="button" id="down2" style="width:120px;height:40px;border:2px blue none;background-color:red;top:65px;"  onClick="conn()" value="连接电磁炉">
   </div>
 </div>
 </body>
