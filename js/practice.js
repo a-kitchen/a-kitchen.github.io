@@ -34,7 +34,7 @@ function conn(){
 	_ep.setAttribute("class", "z-crt");
 	
    var zhText = __lis[0].text;
-   responsiveVoice.speak(zhText, "Chinese Female", {rate: 1.0});
+   responsiveVoice.speak("123456789", "Chinese Female", {rate: 1.0});
     
          });
 };
