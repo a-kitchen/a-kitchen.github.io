@@ -30,13 +30,27 @@ function conn(){
 	__eul.appendChild(eli);
 }
 
+
+
 	var _ep = __eul.children[0];
 	_ep.setAttribute("class", "z-crt");
 	
-   var zhText = __lis[0].text;
-   responsiveVoice.speak("123456789", "Chinese Female", {rate: 1.0});
+
     
          });
+		 
+		 while(true){
+			
+				
+				if(__lis[0].text != ""){
+					    var zhText = __lis[0].text;
+						   responsiveVoice.speak(23456789", "Chinese Female", {rate: 1.0});
+   console.log("123456");
+					break;
+				}
+
+			 
+		 }
 };
 
 
@@ -111,7 +125,6 @@ function xia(){
 			down.value="下一步"
 		}
 		destime--;
-    console.log(destime);
      }, 1000);
 	  }
 	
