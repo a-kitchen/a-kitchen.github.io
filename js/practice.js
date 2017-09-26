@@ -40,12 +40,11 @@ function conn(){
          });
 		 
 		 while(true){
-			
-				
-				if(__lis[0].text != ""){
+			var zhText = __lis[0].text;
+				if(zhText.length !=0){
 					    var zhText = __lis[0].text;
-						   responsiveVoice.speak(23456789", "Chinese Female", {rate: 1.0});
-   console.log("123456");
+						responsiveVoice.speak(23456789", "Chinese Female", {rate: 1.0});
+                          console.log("123456");
 					break;
 				}
 
